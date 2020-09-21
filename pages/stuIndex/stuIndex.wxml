@@ -1,0 +1,50 @@
+<!--pages/stuIndex/stuIndex.wxml-->
+<view class="body">
+  <!--用户信息-->
+  <view class="user">
+    <view class="userHead">
+      <image src="../../images/ming.png"></image>
+    </view>
+    <view class="userInfo">
+      <view class="name">{{userInfo.sname}}</view>
+      <view class="userID">{{userInfo.studentid}}</view>
+    </view>
+    <view class="other">
+      <view class="set">
+        <image src="../../images/set.png"></image>
+      </view>
+      <view class="toExams">所有测试</view>
+    </view>
+  </view>
+  <!--标题-->
+  <view class="tittle">
+    <view class="tittle">待完成</view>
+  </view>
+  <!--考试列表-->
+  <!--未完成-->
+  <view class="todo">
+    <view class="exams">
+      <view class="examsItem" wx:for="{{exams}}" bindtap="joinExam" data-id="{{item.ex_id}}" data-index="{{index}}">
+        <!--颜色块-->
+        <view class="itemLeft">
+        </view>
+        <!--中间内容：课程名称，发布及截止时间-->
+        <view class="itemMiddle">
+          <view class="middleDes">
+            <view class="courseName">{{item.crs_name}}</view>
+            <view class="sTime">{{item.start_time}}</view>
+            <view class="eTime">{{item.end_time}}</view>
+          </view>
+        </view>
+        <!--测试名，剩余时间-->
+        <view class="itemRight">
+          <view class="examName">{{item.ex_name}}</view>
+          <view class="time">发布者
+            <p>{{item.t_name}}</p>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

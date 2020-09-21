@@ -1,0 +1,22 @@
+<!--pages/manageTeach/manageTeach.wxml-->
+<!--课程列表-->
+<view class="body">
+  <view class="addTeach" bindtap="toAddTeach">
+    + 添加课程
+  </view>
+  <view class="courseList">
+    <view class="courses">
+      <view class="coursesItem" wx:for="{{courses}}" bindtap="joinExam" data-id="{{item.teachid}}" data-index="{{index}}">
+        <view class="itemHead">
+          <view class="courseName">{{item.crs_name}}</view>
+          <view class="teacherName">{{userInfo.t_name}}</view>
+          <view class="clName">{{item.cl_name}}</view>
+        </view>
+        <view class="itemBottom">
+          <view class="countExam">已发布测验：{{item.countExam}}</view>
+          <view class="countExam">人数：{{item.countStu}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

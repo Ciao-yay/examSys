@@ -1,0 +1,108 @@
+/* pages/stuIndex/stuIndex.wxss */
+.body{
+  height: 100%;
+  font-size: 9pt;
+  background: #fffffb;
+}
+.user{
+  width:90%;
+  height: 160rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20rpx 0 0 10rpx;
+}
+.userHead{
+  margin: 15rpx;
+}
+.userHead image{
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+
+}
+.userInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 10rpx;
+}
+.userInfo view{
+  height: 40rpx;
+  font-size:11pt;
+  color: goldenrod;
+  margin: 10rpx;
+}
+.other{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.other view{
+  height: 40rpx;
+  text-align: center;
+  width: 150rpx;
+  font-size:9pt;
+  color: white;
+}
+.set image{
+  width: 32rpx;
+  height: 32rpx;
+}
+.toExams{
+  background-color: rgb(0,154,214);
+  border-radius: 10%;
+}
+.tittle{
+  height: 60rpx;
+  width: 95%;
+  line-height: 60rpx;
+  margin:10rpx auto ;
+  border-bottom: 1rpx solid rgb(204,204,204);
+  font-size: 10pt;
+}
+.exams{
+  width: 100%;
+  height: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15rpx 0 0 0;
+}
+
+.examsItem{
+  width: 90%;
+  height: 150rpx;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: rgb(255,255,255);
+  border-radius:20rpx;
+  box-shadow: 3px 3px 3px rgb(204,204,204);
+  margin: 15rpx 0;
+}
+.itemLeft{
+  width: 5%;
+  height: 150rpx;
+  background: rgb(0,154,214);
+  border-radius:20rpx 0 0 20rpx;
+}
+.itemMiddle{
+  width: 60%;
+}
+.middleDes{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+}
+.itemRight{
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,143 @@
+
+.body{
+  height: 100%;
+  font-size: 9pt;
+  background: #fffffb;
+}
+.user{
+  width:90%;
+  height: 160rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20rpx 0 0 10rpx;
+}
+.userHead{
+  margin: 15rpx;
+}
+.userHead image{
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+
+}
+.userInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 10rpx;
+}
+.userInfo view{
+  height: 40rpx;
+  font-size:11pt;
+  color: goldenrod;
+  margin: 10rpx;
+}
+.other{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.other view{
+  height: 40rpx;
+  text-align: center;
+  width: 150rpx;
+  font-size:9pt;
+  color: white;
+}
+.set image{
+  width: 32rpx;
+  height: 32rpx;
+}
+.toExams,.toCourses{
+  background-color: rgb(0,154,214);
+  border-radius: 10%;
+}
+.tittle{
+  height: 60rpx;
+  width: 95%;
+  margin:10rpx auto ;
+  border-bottom: 1rpx solid rgb(204,204,204);
+}
+.courses{
+  width: 100%;
+  height: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15rpx 0 0 0;
+}
+
+.coursesItem{
+  width: 90%;
+  height: 250rpx;
+  display:flex;
+  flex-direction: column;
+  background: rgb(255,255,255);
+  border-radius:20rpx;
+  box-shadow: 3px 3px 3px rgb(204,204,204);
+  margin: 15rpx 0;
+}
+
+.itemHead{
+  width: 100%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: rgb(225,180,29);
+  border-radius:20rpx 20rpx 0 0;
+  color: white;
+}
+.coursesItem:nth-child(3n+1) .itemHead{
+  background-color: rgb(0,154,214);
+}
+.coursesItem:nth-child(3n+0) .itemHead{
+  background-color: rgb(29,149,63);
+}
+.courseName{
+  width: 100%;
+  text-align: center;
+  font-size:40rpx;
+  line-height: 40rpx;
+  margin: 10px 0 0 0;
+}
+.teacherName{
+  width: 95%;
+  font-size: 30rpx;
+  line-height: 30rpx;
+  margin: 2rpx auto;
+}
+.clName{
+  width: 95%;
+  font-size: 30rpx;
+  line-height: 30rpx;
+  text-align: end;
+  margin: 2rpx auto;
+}
+
+.itemBottom{
+  width: 95%;
+  height: 35%;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-radius:0 0 20rpx 20rpx;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(225,180,29);
+  margin: 0 auto;
+}
+.coursesItem:nth-child(3n+1) .itemBottom{
+  color:rgb(0,154,214);
+}
+.coursesItem:nth-child(3n+0) .itemBottom{
+  color:rgb(29,149,63);
+}
+.itemBottom view{
+  font-size:35rpx;
+  line-height: 35rpx;
+}

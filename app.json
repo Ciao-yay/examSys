@@ -1,0 +1,27 @@
+{
+  "pages":[
+    "pages/stuIndex/stuIndex",
+    "pages/preExam/preExam",
+    "pages/exams/exams",
+    "pages/examFinished/examFinished",
+    "pages/examDes/examDes",
+    "pages/answerDes/answerDes",
+    "pages/logs/logs",
+    "pages/studentSet/studentSet",
+    "pages/teaIndex/teaIndex",
+    "pages/courseDes/courseDes",
+    "pages/manageTeach/manageTeach",
+    "pages/addTeach/addTeach",
+    "pages/publishExam/publishExam",
+    "pages/chooseIdentity/chooseIdentity",
+    "pages/test/test"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

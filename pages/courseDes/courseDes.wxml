@@ -1,0 +1,49 @@
+<!--pages/teachDes/teachDes.wxml-->
+<view class="body">
+  <view class="crsName">{{course.crs_name}}</view>
+  <view class="information">
+    <view class="title">基本信息</view>
+    <view class="content">
+      <view class="teacherName">{{userInfo.t_name}}</view>
+      <view class="creatTime">{{course.creatTime}}</view>
+      <view class="clName">{{course.cl_name}}</view>
+      <view class="countStu">{{course.countStu}}</view>
+    </view>
+  </view>
+  <view class="introduce">
+    <view class="title">课程介绍</view>
+    <view class="content">暂无~</view>
+  </view>
+  <view class="publishedExams">
+    <view class="title" >已发布测试</view>
+    <view class="content" wx:if="{{exams.length<1}}">暂无~</view>
+    <view class="content" wx:if="{{exams.length>0}}">
+      <view class="exams">
+        <view class="examsItem" wx:for="{{exams}}" bindtap="joinExam" data-id="{{item.ex_id}}" data-index="{{index}}">
+          <!--颜色块-->
+          <view class="itemLeft">
+          </view>
+          <!--中间内容：课程名称，发布及截止时间-->
+          <view class="itemMiddle">
+            <view class="middleDes">
+              <view class="courseName">{{item.crs_name}}</view>
+              <view class="sTime">{{item.start_time}}</view>
+            </view>
+          </view>
+          <!--测试名，剩余时间-->
+          <view class="itemRight">
+            <view class="examName">{{item.ex_name}}</view>
+            <view class="time">发布者
+              <p>{{item.t_name}}</p>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="showMore" bindtap="showMore">{{isShow?"-":"+"}}</view>
+<view class="bottom" wx:if="{{isShow}}">
+  <view class="publishExam" bindtap="toPublishExam">发布新的测试</view>
+  <view class="deleteTeach">删除课程</view>
+</view>

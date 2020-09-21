@@ -1,0 +1,39 @@
+/* pages/publishExam/publishExam.wxss */
+
+.addTeach {
+  height: 90rpx;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  background: rgb(255, 255, 255);
+  border-radius: 20rpx;
+  box-shadow: 1px 1px 5px rgb(110, 110, 110);
+  color: rgb(0, 154, 214);
+  font-size: 35rpx;
+  line-height: 90rpx;
+  text-align: center;
+  /* border: 1rpx solid rgb(204, 204, 204) */
+}
+
+/* .addTeach:nth-child(3) {
+  color: white;
+  background: rgb(0, 154, 214);
+  box-shadow: 2px 2px 3px rgb(204, 204, 204);
+} */
+
+.addTeach:nth-child(1) {
+  margin-top: 160rpx;
+}
+
+.commit {
+  height: 90rpx;
+  width: 40%;
+  margin: 40rpx auto;
+  color: white;
+  background: rgb(0, 154, 214);
+  box-shadow: 2px 2px 3px rgb(204, 204, 204);
+  border-radius: 20rpx;
+  text-align: center;
+  font-size: 35rpx;
+  line-height: 90rpx;
+}

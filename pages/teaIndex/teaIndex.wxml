@@ -1,0 +1,41 @@
+<view class="body">
+  <!--用户信息-->
+  <view class="user">
+    <view class="userHead">
+      <image src="../../images/ming.png"></image>
+    </view>
+    <view class="userInfo">
+      <view class="name">{{userInfo.t_name}}</view>
+      <view class="userID">{{userInfo.tno}}</view>
+    </view>
+    <view class="other">
+      <view class="set">
+        <image src="../../images/set.png"></image>
+      </view>
+      <view class="toCourses" bindtap="toManageTeach">课程管理</view>
+      <view class="toExams">测试管理</view>
+    </view>
+  </view>
+  <!--标题-->
+  <view class="tittle">
+
+  </view>
+  <!--课程列表-->
+
+  <view class="courseList">
+    <view class="courses">
+      <view class="coursesItem" wx:for="{{courses}}" bindtap="toTeachDes" data-index="{{index}}">
+        <view class="itemHead">
+          <view class="courseName">{{item.crs_name}}</view>
+          <view class="teacherName">{{userInfo.t_name}}</view>
+          <view class="clName">{{item.cl_name}}</view>
+        </view>
+        <view class="itemBottom">
+          <view class="countExam">已发布测验：{{item.countExam}}</view>
+          <view class="countExam">人数：{{item.countStu}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

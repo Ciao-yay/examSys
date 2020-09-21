@@ -1,0 +1,18 @@
+/* pages/chooseIdentity/chooseIdentity.wxss */
+
+view {
+  height: 90rpx;
+  width: 90%;
+  color: white;
+  background: rgb(0, 154, 214);
+  box-shadow: 2px 2px 3px rgb(204, 204, 204);
+  border-radius: 20rpx;
+  text-align: center;
+  font-size: 35rpx;
+  line-height: 90rpx;
+  margin: 20rpx auto;
+}
+view:nth-child(1){
+  margin-top: 160px;
+  background: rgb(29, 149, 63);
+}

@@ -1,0 +1,8 @@
+/* pages/examFinshed/examFinshed.wxss */
+view{
+  font-size: 40pt;
+  color: red;
+  text-align: center;
+  line-height: 600rpx;
+  margin: 0 auto
+}

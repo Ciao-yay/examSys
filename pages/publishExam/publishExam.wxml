@@ -1,0 +1,36 @@
+<!--pages/publishExam/publishExam.wxml-->
+<view class="addItem">
+  <view class="addTeach" id="chooseCourse">
+    {{course.crs_name}}
+  </view>
+  <!-- TODO -->
+  <!-- <view class="addTeach">
+    <picker bindchange="chooseClass" value="{{indexClass}}" range="{{directionClass}}">
+      开始时间
+    </picker>
+  </view> -->
+  <!-- TODO -->
+  <!-- <view class="addTeach">
+    <picker bindchange="chooseClass" value="{{indexClass}}" range="{{directionClass}}">
+      截止时间
+    </picker>
+  </view> -->
+  <view class="addTeach">
+
+      test
+
+  </view>
+  <view class="addTeach">
+    <picker bindchange="chooseKnow" value="{{indexKnow}}" range="{{knowledge}}">
+      {{isKnowSelected?knowledge[indexKnow]:"选择知识点"}}
+    </picker>
+  </view>
+  <!-- <view class="addTeach">
+    <picker bindchange="chooseClass" value="{{indexClass}}" range="{{directionClass}}">
+      班级
+    </picker>
+  </view> -->
+</view>
+<view class="commit" bindtap="commit">
+  发布
+</view>

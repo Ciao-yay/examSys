@@ -1,0 +1,125 @@
+/* pages/teachDes/teachDes.wxss */
+
+.body {
+  height: 100%;
+  background: #fffffb;
+}
+
+.crsName {
+  width: 95%;
+  height: 100rpx;
+  margin: 10rpx auto;
+  color: rgb(0,154,214);
+  font-size: 50rpx;
+  line-height: 100rpx;
+  font-weight: bold;
+  /* text-align: center; */
+}
+
+.information, .introduce, .publishedExams {
+  width: 95%;
+  margin: 20rpx auto;
+  border-bottom: 1rpx solid rgb(240, 240, 240);
+  color: black;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 40rpx;
+}
+
+.content {
+  font-size: 30rpx;
+  margin: 20rpx 0;
+}
+.content view{
+  margin: 15rpx 0;
+}
+/* 已发布测试 */
+.exams{
+  width: 100%;
+  height: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15rpx 0 0 0;
+}
+
+.examsItem{
+  width: 90%;
+  height: 150rpx;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: rgb(255,255,255);
+  border-radius:20rpx;
+  box-shadow: 3px 3px 3px rgb(204,204,204);
+  margin: 15rpx 0;
+}
+.itemLeft{
+  width: 5%;
+  height: 150rpx;
+  background: rgb(0,154,214);
+  border-radius:20rpx 0 0 20rpx;
+}
+.itemMiddle{
+  width: 60%;
+  height: 150rpx;
+}
+
+.middleDes{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+}
+.itemRight{
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.showMore{
+  font-size: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 50%;
+  background-color: white;
+  color:rgb(0, 154, 214);
+  /* box-shadow: 2px 2px 2px rgb(204, 204, 204); */
+  position: absolute;
+  bottom: 240rpx;
+  right: 10rpx;
+  border:1rpx solid rgb(204, 204, 204);
+}
+
+.bottom {
+  height: 200rpx;
+  width: 100%;
+  position: absolute;
+  bottom: 20rpx;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.bottom view {
+  width: 90%;
+  height: 80rpx;
+  color: white;
+  background: rgb(0, 154, 214,0.7);
+  border-radius: 20rpx;
+  /* box-shadow: 2px 2px 2px rgb(204, 204, 204); */
+  margin: 0 auto;
+  font-size: 35rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
+
+.bottom view:nth-child(2) {
+  background: rgb(255,0,0,0.7);
+  margin-top: 30rpx;
+}

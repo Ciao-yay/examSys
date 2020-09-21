@@ -1,0 +1,35 @@
+<!--pages/preExam/preExam.wxml-->
+<view class="page">
+  <!--倒计时-->
+  <view class="countDown">{{countDown}}</view>
+  <!--题目信息-->
+  <view class="information">
+    <view class="knowledge">{{subject.knowledge}}</view>
+    <view class="level">难度 ： {{subject.level}}</view>
+    <view class="hasDone">已做 ： {{hasDone}}</view>
+  </view>
+  <!--题目主体-->
+  <view class="body">
+    <view class="question"><towxml nodes = "{{subject.question}}"/></view>
+    <view class="options">
+      <view class="optionsItem" wx:for="{{subject.options}}" bindtap="selectFuc" data-id="{{index}}">
+        <view class='{{abcd[item.id].isSelected ? "ABCDSelected":"ABCDDefault"}}'>{{abcd[item.id].name}}</view>
+        <view class="content">{{item.content}}</view>
+      </view>
+    </view>
+  </view>
+  <!--确认答案-->
+  <view class="buttons">
+    <view class="nextPro" bindtap="nextSubject" >
+      下一题
+    </view>
+
+    <view class="commit" bindtap="commitFuc">
+      强制交卷
+    </view>
+  </view>
+  <!--同难度换一题（测试用）-->
+  <view class="testNext" bindtap="changeSubject">
+    同难度随机换一题（测试用）
+  </view>
+</view>

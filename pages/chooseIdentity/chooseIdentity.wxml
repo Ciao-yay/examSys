@@ -1,0 +1,8 @@
+<!--pages/chooseIdentity/chooseIdentity.wxml-->
+
+<view class="teacher" bindtap="toTeaIndex">
+  我是老师
+</view>
+<view class="student" bindtap="toStuIndex">
+  我是学生
+</view>

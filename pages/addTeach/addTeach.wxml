@@ -1,0 +1,15 @@
+<!--pages/addTeach/addTeach.wxml-->
+<view class="addTeach" id="chooseCourse">
+  <picker bindchange="chooseCourse" value="{{index}}" range="{{courses}}">
+    {{isCourseSelected?courses[index]:"选择课程"}}
+  </picker>
+</view>
+
+<view class="addTeach">
+  <picker bindchange="chooseClass" value="{{indexClass}}" range="{{directionClass}}">
+    {{isClassSelected?directionClass[indexClass]:"选择班级"}}
+  </picker>
+</view>
+<view class="addTeach" bindtap="commit">
+  确认
+</view>
