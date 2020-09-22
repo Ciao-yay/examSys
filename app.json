@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/stuIndex/stuIndex",
     "pages/preExam/preExam",
     "pages/exams/exams",
@@ -14,13 +14,46 @@
     "pages/addTeach/addTeach",
     "pages/publishExam/publishExam",
     "pages/chooseIdentity/chooseIdentity",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/upload/upload",
+    "pages/wrongSubs/wrongSubs",
+    "pages/my/my"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/stuIndex/stuIndex",
+        "text": "上传题目",
+        "iconPath": "images/home0.png",
+        "selectedIconPath": "images/home1.png",
+        "selectedColor": "#1296db"
+      },
+      {
+        "pagePath": "pages/upload/upload",
+        "text": "上传题目",
+        "iconPath": "images/upload0.png",
+        "selectedIconPath": "images/upload1.png",
+        "selectedColor": "#1296db"
+      },
+      {
+        "pagePath": "pages/wrongSubs/wrongSubs",
+        "text": "错题集",
+        "iconPath": "images/wrong0.png",
+        "selectedIconPath": "images/wrong1.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "个人中心",
+        "iconPath": "images/my0.png",
+        "selectedIconPath": "images/my1.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

@@ -4,20 +4,22 @@
     {{course.crs_name}}
   </view>
   <!-- TODO -->
-  <!-- <view class="addTeach">
+  <view class="addTeach">
     <picker bindchange="chooseClass" value="{{indexClass}}" range="{{directionClass}}">
-      开始时间
+      
     </picker>
-  </view> -->
+    开始时间
+  </view>
   <!-- TODO -->
-  <!-- <view class="addTeach">
+  <view class="addTeach">
     <picker bindchange="chooseClass" value="{{indexClass}}" range="{{directionClass}}">
-      截止时间
+      
     </picker>
-  </view> -->
+    截止时间
+  </view>
   <view class="addTeach">
 
-      test
+    test
 
   </view>
   <view class="addTeach">

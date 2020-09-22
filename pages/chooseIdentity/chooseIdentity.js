@@ -15,14 +15,20 @@ Page({
     wx.navigateTo({
       url: '../teaIndex/teaIndex',
     })
+    // wx.switchTab({
+    //   url: '../teaIndex/teaIndex',
+    // })
   },
   /**
    * 跳转到学生首页
    */
   toStuIndex: function(e) {
-    wx.navigateTo({
+    // wx.navigateTo({
+    //   url: '../stuIndex/stuIndex',
+    // });
+    wx.switchTab({
       url: '../stuIndex/stuIndex',
-    });
+    })
   },
   /**
    * 生命周期函数--监听页面加载

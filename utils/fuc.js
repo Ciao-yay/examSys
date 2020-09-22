@@ -1,3 +1,4 @@
+const app = getApp();
 // 封装一些函数
 /**
  * 难度判定算法（测试版本）
@@ -281,8 +282,23 @@ function arrObjectToStr(arr){
   }
   return newArr
 }
+//将LaTex数学公式解析成markdown格式
+function latexToMarkdown(subjects){
+  var newSubjects = []
+  for (var i = 0; i < subjects.length;i++){
+    var subject = subjects[i]
+    subject.question = app.towxml(subject.question, 'markdown');
+    subject.optionA = app.towxml(subject.optionA, 'markdown');
+    subject.optionB = app.towxml(subject.optionB, 'markdown');
+    subject.optionC = app.towxml(subject.optionC, 'markdown');
+    subject.optionD = app.towxml(subject.optionD, 'markdown');
+    newSubjects.push(subject)
+  }
+  return newSubjects
+}
 
 module.exports = {
+  latexToMarkdown: latexToMarkdown,
   addOptions: addOptions,
   StringBuffer: StringBuffer,
   randomNum: randomNum,

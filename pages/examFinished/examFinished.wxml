@@ -1,2 +1,16 @@
 <!--pages/examFinshed/examFinshed.wxml-->
-<view><text>{{score}}</text></view>
+<view class="head">
+  <view class="logo">
+    <image src="../../images/logo.png"></image>
+  </view>
+  <view class="headTittle">
+    大学数学单元练习系统
+  </view>
+</view>
+<view class="tittle">
+  您的测验成绩为：
+</view>
+<view class="score">
+  <text>{{score}}</text>
+</view>
+<view class="back" bindtap="backHome">返回首页</view>

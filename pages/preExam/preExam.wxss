@@ -5,10 +5,35 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background: 255,255,254;
 }
 .page view{
   margin: 15rpx 0;
+}
+
+.head{
+  height: 105rpx;
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  margin: 0 auto;
+  font-size: 40rpx;
+  line-height: 90rpx;
+  text-align: center;
+  color: rgb(0,154,214);
+  border-top: 1rpx solid  rgb(204,204,204);
+  border-bottom: 1rpx solid  rgb(204,204,204);
+}
+.headTittle{
+  margin-left: 80rpx;
+}
+.logo{
+  margin-left: 20rpx;
+}
+.head image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
 }
 .countDown{
   font:11pt;
@@ -44,10 +69,10 @@
 }
 .question{
   width: 100%;
-  height: 100rpx;
+  height: 300rpx;
   padding: 5rpx;
   border-bottom: 1rpx solid black;
-  font-size:10pt;
+  font-size:9pt;
   line-height: 100rpx;
   text-align: center;
 }
@@ -69,6 +94,13 @@
   margin: 10rpx 0 0 0;
   padding: 0 0 10rpx 0;
 }
+.optionsItem towxml{
+  height: 100rpx;
+}
+.optionsItem content{
+  height: 100rpx;
+}
+
 .optionsItem:last-child{
   border-bottom: none;
 }
@@ -81,6 +113,7 @@
   font-size:11pt;
   text-align: center;
   line-height: 70rpx;
+  margin: 50rpx 0 0 0;
 }
 .ABCDSelected{
   width: 70rpx;
@@ -91,6 +124,7 @@
   font-size:11pt;
   text-align: center;
   line-height: 70rpx;
+  margin: 50rpx 0 0 0;
 }
 .content{
   width: 85%;

@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -109,6 +109,13 @@
 					"id": 7,
 					"name": "Latex数学公式解析测试",
 					"pathName": "pages/test/test",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "完成界面",
+					"pathName": "pages/examFinished/examFinished",
 					"query": "",
 					"scene": null
 				}

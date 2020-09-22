@@ -30,37 +30,41 @@ Page({
   commit: function(e) {
     var that = this;
     var flag = that.data.isKnowSelected;
+    var startTime = "2020/09/20 08:00";
+    var endTime = "2020/09/26 08:00";
+    var exName = "test";
+    var memo = "测试";
     if (flag) {
       wx.showModal({
         title: '确认发布',
         content: '是否发布测试？',
         success(res) {
           if (res.confirm) {
-            var te_id = that.data.course.te_id;
-            fuc.request(api.publicExam, {
-              te_id
-            }).then(function(res) {
-              var examData = {};
-              var ex_id = res.data[1][0].lastID;
-              var knowledgeList = that.data.knowledgeList;
-              var staKnName = that.data.knowledge[that.data.indexKnow];
-              examData.ex_id = ex_id;
-              for (var i in knowledgeList) {
-                if (knowledgeList[i].kn_name == staKnName) {
-                  examData.kn_id = knowledgeList[i].kn_id
-                }
+            var examData = {};
+            var knowledgeList = that.data.knowledgeList;
+            var staKnName = that.data.knowledge[that.data.indexKnow];
+            for (var i in knowledgeList) {
+              if (knowledgeList[i].kn_name == staKnName) {
+                examData.kn_id = knowledgeList[i].kn_id
               }
-              fuc.request(api.addExamKnow, examData).then(function(res) {
-                wx.showToast({
-                  title: '发布成功',
-                  icon: 'success',
-                  mask: true,
-                  complete(res) {
-                    wx.navigateTo({
-                      url: '../teaIndex/teaIndex',
-                    })
-                  }
-                })
+            }
+            var te_id = that.data.course.te_id;
+            examData.startTime = startTime;
+            examData.endTime = endTime;
+            // examData.kn_id = kn_id;
+            examData.te_id = te_id;
+            examData.exName = exName;
+            examData.memo = memo;
+            fuc.request(api.publicExamTest, examData).then(function(res) {
+              wx.showToast({
+                title: '发布成功',
+                icon: 'success',
+                mask: true,
+                complete(res) {
+                  wx.navigateTo({
+                    url: '../teaIndex/teaIndex',
+                  })
+                }
               })
             })
           } else if (res.cancel) {

@@ -1,10 +1,17 @@
 <!--pages/stuIndex/stuIndex.wxml-->
 <view class="body">
+<!-- <view class="line"></view> -->
+  <view class="head">
+    <view class="logo">
+      <image src="../../images/logo.png"></image>
+    </view>
+    <view class="headTittle">
+      大学数学单元练习系统
+    </view>
+  </view>
+  <!-- <view class="line"></view> -->
   <!--用户信息-->
   <view class="user">
-    <view class="userHead">
-      <image src="../../images/ming.png"></image>
-    </view>
     <view class="userInfo">
       <view class="name">{{userInfo.sname}}</view>
       <view class="userID">{{userInfo.studentid}}</view>

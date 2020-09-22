@@ -1,5 +1,14 @@
 <!--pages/preExam/preExam.wxml-->
+<view class="head">
+  <view class="logo">
+    <image src="../../images/logo.png"></image>
+  </view>
+  <view class="headTittle">
+    大学数学单元练习系统
+  </view>
+</view>
 <view class="page">
+
   <!--倒计时-->
   <view class="countDown">{{countDown}}</view>
   <!--题目信息-->
@@ -10,17 +19,21 @@
   </view>
   <!--题目主体-->
   <view class="body">
-    <view class="question"><towxml nodes = "{{subject.question}}"/></view>
+    <view class="question">
+      <towxml nodes="{{subject.question}}" />
+    </view>
     <view class="options">
       <view class="optionsItem" wx:for="{{subject.options}}" bindtap="selectFuc" data-id="{{index}}">
         <view class='{{abcd[item.id].isSelected ? "ABCDSelected":"ABCDDefault"}}'>{{abcd[item.id].name}}</view>
-        <view class="content">{{item.content}}</view>
+        <view class="content">
+          <towxml nodes="{{item.content}}" />
+        </view>
       </view>
     </view>
   </view>
   <!--确认答案-->
   <view class="buttons">
-    <view class="nextPro" bindtap="nextSubject" >
+    <view class="nextPro" bindtap="nextSubject">
       下一题
     </view>
 

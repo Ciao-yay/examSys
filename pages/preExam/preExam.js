@@ -8,6 +8,7 @@ Page({
    */
   data: {
     sid: app.globalData.sid,
+    abcd: app.globalData.abcd,
     tittle: "回答错误！",
     content: "下一题难度降低，请继续作答！",
     ex_id: 0,
@@ -17,23 +18,6 @@ Page({
     level: 0,
     crsid: 0,
     countDown: "00:09:59",
-    abcd: [{
-      id: 0,
-      name: "A",
-      isSelected: false,
-    }, {
-      id: 1,
-      name: "B",
-      isSelected: false,
-    }, {
-      id: 2,
-      name: "C",
-      isSelected: false,
-    }, {
-      id: 3,
-      name: "D",
-      isSelected: false,
-    }],
     exam: {},
     subject: {},
     subjects: [],
@@ -76,12 +60,10 @@ Page({
     //生成随机数，从题目对象中随机选一道题目
     var i = fuc.randomNum(1, subjects.length) - 1
     var subject = fuc.addOptions(subjects[i]);
-    subject.question = app.towxml(subject.question, 'markdown');
     that.setData({
       subject: subject,
       abcd: fuc.removeOptionColor(that.data.abcd),
-      yourAnswer: '',
-      isLoading:false
+      yourAnswer: ''
     });
   },
   /**
@@ -164,6 +146,7 @@ Page({
                 // console.log(res.data);
                 //获取题目对象
                 var subjects = res.data;
+                subjects = fuc.latexToMarkdown(subjects);
                 if (isRight) {
                   tittle = "回答正确！",
                     content = "下一题难度增加！"
@@ -177,7 +160,6 @@ Page({
                     // console.log(''+136+subjects);
                     var i = fuc.randomNum(1, subjects.length) - 1;
                     var subject = fuc.addOptions(subjects[i]);
-                    subject.question = app.towxml(subject.question, 'markdown');
                     console.log(subject)
                     //清除选项颜色
                     fuc.removeOptionColor(abcd);
@@ -190,7 +172,7 @@ Page({
                       yourAnswer: '',
                       isRight: false,
                       subResult: newSubResult,
-                      isLoading: false
+                      isLoading:false
                     });
                   }
                 })
@@ -235,6 +217,7 @@ Page({
       subResult: newSubResult
     })
     // console.log(that.data.startTime);
+    console.log(that.data.crsid);
     /**
      * 初始化第一道题
      */
@@ -242,14 +225,14 @@ Page({
       level: exam.min_level,
       crsid: that.data.crsid,
     }).then(function(res) {
-      // console.log(res.data);
+      console.log(res.data);
       //获取题目对象
       var subjects = res.data;
+      var subjects = fuc.latexToMarkdown(subjects);
+      console.log(subjects)
       //生成随机数，从题目对象中随机选一道题目
       var i = fuc.randomNum(1, subjects.length) - 1
       var subject = fuc.addOptions(res.data[i]);
-      subject.question = app.towxml(subject.question, 'markdown');
-      console.log(subject)
       that.setData({
         subject: subject,
         hasDone: 0,

@@ -1,5 +1,15 @@
 <!--pages/chooseIdentity/chooseIdentity.wxml-->
-
+<view class="head">
+  <view class="logo">
+    <image src="../../images/logo.png"></image>
+  </view>
+  <view class="headTittle">
+    大学数学单元练习系统
+  </view>
+</view>
+<view class="logoSchool">
+  <image src="../../images/school.png"></image>
+</view>
 <view class="teacher" bindtap="toTeaIndex">
   我是老师
 </view>

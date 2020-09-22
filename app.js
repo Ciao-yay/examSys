@@ -16,7 +16,7 @@ App({
       }
     });
   },
-  onLaunch: function () {
+  onLaunch: function() {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -51,6 +51,24 @@ App({
   },
   globalData: {
     userInfo: null,
-    sid:1,
+    sid: 1,
+    abcd: [{
+      id: 0,
+      name: "A",
+      isSelected: false,
+    }, {
+      id: 1,
+      name: "B",
+      isSelected: false,
+    }, {
+      id: 2,
+      name: "C",
+      isSelected: false,
+    }, {
+      id: 3,
+      name: "D",
+      isSelected: false,
+    }],
+    ex_ids:[]
   }
 })

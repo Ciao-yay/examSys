@@ -15,6 +15,7 @@ Page({
     const _ts = this;
     fuc.request(api.getLatexSubject, {}).then(function(res) {
       let obj = app.towxml(res.data[0].question, 'markdown');
+      console.log(obj)
       _ts.setData({
         article: obj,
         isLoading: false

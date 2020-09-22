@@ -1,39 +1,18 @@
-// pages/examFinshed/examFinshed.js
+// pages/my/my.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    subResult:[],
-    score : 0,
+
   },
-  backHome:function(e){
-    // wx.navigateTo({
-    //   url: '../stuIndex/stuIndex',
-    // })
-    wx.switchTab({
-      url: '../stuIndex/stuIndex',
-      success:function(e){
-        var page = getCurrentPages().pop()
-        console.log(page)
-        if(page == undefined || page == null) return;
-        page.onLoad();
-      }
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    var subResult = JSON.parse(options.subResult)
 
-    that.setData({
-      subResult: subResult,
-      score : options.score
-    })
-    console.log(subResult)
   },
 
   /**
