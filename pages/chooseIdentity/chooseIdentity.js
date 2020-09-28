@@ -1,4 +1,7 @@
 // pages/chooseIdentity/chooseIdentity.js
+const fuc = require('../../utils/fuc.js')
+const api = require('../../utils/api.js')
+const app = getApp()
 Page({
 
   /**
@@ -26,15 +29,44 @@ Page({
     // wx.navigateTo({
     //   url: '../stuIndex/stuIndex',
     // });
-    wx.switchTab({
-      url: '../stuIndex/stuIndex',
+    // wx.switchTab({
+    //   url: '../stuIndex/stuIndex',
+    // })
+    wx.reLaunch({
+      url: '../loginTest/loginTest',
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.login({
+      success: res => {
+        //发送 res.code 到后台换取 openId, sessionKey, unionId
+        // console.log(res.code);
+        fuc.request(api.getOpenid, {
+          "code": res.code,
+          "appid": app.globalData.appid,
+          "appsecret": app.globalData.appsecret
+        }).then(function(res) {
+          var userInfo = wx.getStorageSync("userInfo")
+          if (res.data == userInfo.s_openid) {
+            wx.showLoading({
+              title: '跳转中',
+              success: function(res) {
+                wx.reLaunch({
+                  url: '../stuIndex/stuIndex',
+                })
+              }
+            })
 
+          } else {
+
+          }
+        })
+
+      }
+    })
   },
 
   /**

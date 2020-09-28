@@ -1,0 +1,51 @@
+/* pages/loginTest/loginTest.wxss */
+.head{
+  height: 105rpx;
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  margin: 0 auto;
+  font-size: 40rpx;
+  line-height: 90rpx;
+  text-align: center;
+  color: rgb(0,154,214);
+  border-top: 1rpx solid  rgb(204,204,204);
+  border-bottom: 1rpx solid  rgb(204,204,204);
+}
+.headTittle{
+  margin-left: 80rpx;
+}
+.logo{
+  margin-left: 20rpx;
+}
+.head image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.logoSchool{
+  height: 400rpx;
+  width: 98%;
+  margin: 0 auto;
+}
+view image{
+  height: 100%;
+  width: 100%;
+}
+.userid{
+  width: 80%;
+  height: 70rpx;
+  margin: 30rpx auto;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  border: 1rpx solid gray;
+}
+input{
+  height: 60rpx;
+}
+button{
+  background: rgb(29, 149, 63);
+  color: white;
+  /* width: 50rpx; */
+}

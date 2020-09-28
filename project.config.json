@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -117,6 +117,19 @@
 					"name": "完成界面",
 					"pathName": "pages/examFinished/examFinished",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "学生首页",
+					"pathName": "pages/stuIndex/stuIndex",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "登陆测试",
+					"pathName": "pages/loginTest/loginTest",
 					"scene": null
 				}
 			]

@@ -1,4 +1,6 @@
 //app.js
+const fuc = require('utils/fuc.js')
+const api = require('utils/api.js')
 App({
   // 引入`towxml3.0`解析方法
   towxml: require('/towxml/index'),
@@ -18,6 +20,7 @@ App({
   },
   onLaunch: function() {
     // 展示本地存储能力
+    var that = this;
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
@@ -25,7 +28,21 @@ App({
     // 登录
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        //发送 res.code 到后台换取 openId, sessionKey, unionId
+        // console.log(res);
+        // fuc.request(api.loginTest, {
+        //   "code":res.code,
+        //   "appid": that.globalData.appid,
+        //   "appsecret": that.globalData.appsecret
+        // }).then(function(res){
+        //   console.log(res)
+        // })
+        // if(that.globalData.userInfo==null){
+        //   // wx.reLaunch({
+        //   //   url: '../chooseIdentity/chooseIdentity',
+        //   // })
+        //   // console.log(getCurrentPages())
+        // }
       }
     })
     // 获取用户信息
@@ -37,7 +54,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+              // console.log(res.userInfo)
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -52,6 +69,8 @@ App({
   globalData: {
     userInfo: null,
     sid: 1,
+    appid:"wx2f6048bbc0d0cd10",
+    appsecret:"43a97076995452dc56b9036753b8182f",
     abcd: [{
       id: 0,
       name: "A",
@@ -69,6 +88,6 @@ App({
       name: "D",
       isSelected: false,
     }],
-    ex_ids:[]
+    ex_ids: []
   }
 })

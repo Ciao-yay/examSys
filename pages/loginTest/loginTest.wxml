@@ -1,0 +1,22 @@
+<!-- pages/loginTest/loginTest.wxml -->
+<!-- <open-data type="userAvatarUrl"></open-data>
+<open-data type="userNickName"></open-data> -->
+<!-- 需要使用 button 来授权登录 -->
+<view class="head">
+  <view class="logo">
+    <image src="../../images/logo.png"></image>
+  </view>
+  <view class="headTittle">
+    大学数学单元练习系统
+  </view>
+</view>
+<view class="logoSchool">
+  <image src="../../images/school.png"></image>
+</view>
+<view class="userid" >
+  <input class="inUserid" bindblur="getUserid" maxlength="11" placeholder="输入11位学号" type="number"></input>
+</view>
+<!-- <view class="{{isRight:'hint_right':'hint_wrong'}}" wx:if="{{isIn}}"></view> -->
+<!-- <button  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button> -->
+<button  bindtap="login">登录</button>
+<!-- <view wx:else>请升级微信版本</view> -->

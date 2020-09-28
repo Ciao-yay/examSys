@@ -15,14 +15,14 @@ const app = getApp();
  * --难度在最小难度到最大难度之间 包括最大难度，不包括最小难度，返回难度-1
  * --难度等于最小难度，返回难度不变
  */
-function getLevel(isRight,minLevel,maxLevel,currentLevel){
-  if (isRight){
-    if (currentLevel >= minLevel && currentLevel < maxLevel){
-      return currentLevel+1
-    }else{
+function getLevel(isRight, minLevel, maxLevel, currentLevel) {
+  if (isRight) {
+    if (currentLevel >= minLevel && currentLevel < maxLevel) {
+      return currentLevel + 1
+    } else {
       return 0
     }
-  }else{
+  } else {
     if (currentLevel > minLevel && currentLevel <= maxLevel) {
       return currentLevel - 1
     } else {
@@ -37,20 +37,20 @@ function getLevel(isRight,minLevel,maxLevel,currentLevel){
  * 分数：每个难度占的分值的和/难度和
  * 
  */
-function getScore(subResult){
+function getScore(subResult) {
   var score = 0;
   var levelTotal = 0;
-  for (var i = 0;i < subResult.length;i++){
+  for (var i = 0; i < subResult.length; i++) {
     var rightTotal = subResult[i].rightTotal
     var wrongTotal = subResult[i].wrongTotal
     var total = rightTotal + wrongTotal
     var level = subResult[i].level
-    if (total != 0){
-      score += Math.round(100*level*rightTotal/total)
+    if (total != 0) {
+      score += Math.round(100 * level * rightTotal / total)
       levelTotal += level
     }
   }
-  score = Math.round(score/levelTotal)
+  score = Math.round(score / levelTotal)
   return score
 }
 
@@ -58,18 +58,18 @@ function getScore(subResult){
  * 封封微信的的request
  */
 function request(url, data = {}) {
-  return new Promise(function (resolve, reject) {
+  return new Promise(function(resolve, reject) {
     wx.request({
       url: url,
       data: data,
       header: {
         "Content-Type": "application/json"
       }, // 设置请求的 header
-      success: function (res) {
+      success: function(res) {
         resolve(res);
       },
-      fail: function () {
-        reject(res);
+      fail: function() {
+        reject();
       }
     });
   });
@@ -79,7 +79,19 @@ function request(url, data = {}) {
 数据库的存储的题目格式与前端需求的题目格式不一致，每次得到题目后需要先修改下格式
 */
 function addOptions(subject) {
-  var options = [{id: 0,content: ""}, {id: 1,content: ""}, {id: 2,content: ""}, {id: 3,content: ""}]
+  var options = [{
+    id: 0,
+    content: ""
+  }, {
+    id: 1,
+    content: ""
+  }, {
+    id: 2,
+    content: ""
+  }, {
+    id: 3,
+    content: ""
+  }]
   options[0].content = subject.optionA
   options[1].content = subject.optionB
   options[2].content = subject.optionC
@@ -88,61 +100,6 @@ function addOptions(subject) {
   return subject
 }
 
-/*
-定义一个简单的stringBuffer,因为需要动态拼接sql语句
-*/
-function StringBuffer() {
-  this.__strings__ = [];
-};
-StringBuffer.prototype.Append = function (str) {
-  this.__strings__.push(str);
-  return this;
-};
-// //格式化字符串
-// StringBuffer.prototype.AppendFormat = function (str) {
-//   for (var i = 1; i < arguments.length; i++) {
-//     var parent = "\\{" + (i - 1) + "\\}";
-//     var reg = new RegExp(parent, "g")
-//     str = str.replace(reg, arguments[i]);
-//   }
-
-//   this.__strings__.push(str);
-//   return this;
-// }
-StringBuffer.prototype.ToString = function () {
-  return this.__strings__.join('');
-};
-// StringBuffer.prototype.clear = function () {
-//   this.__strings__ = [];
-// }
-StringBuffer.prototype.size = function () {
-  return this.__strings__.length;
-}
-
-
-/*
-获取题目
-*/
-
-function getSubject(){
-
-}
-
-/*
-拼接sql语句
-*/
-function conSql() {
-  var sb = new StringBuffer()
-  sb.append("SELECT prbm_id,question,optionA,optionB,optionC,optionD,anwser,kn_name AS knowledge FROM problem_store p LEFT JOIN knowledge k ON p.kn_id = k.kn_id LEFT JOIN course c ON k.crs_id = c.crs_id WHERE prbm_id = '").append(uid).append("' bm in (")
-  for (var i = 0, k = sessionBMQX.size(); i < k; i++) {//sessionBMQX为List
-    if (i > 0) {
-      sb.append(",");
-    }
-    sb.append("'").append(sessionBMQX.get(i)).append("'");
-  }
-  sb.append(")");
-  System.out.println("sql==========" + sb.toString());//输出这个sql语句，看有没语法错误
-  }
 //生成从minNum到maxNum的随机数
 function randomNum(minNum, maxNum) {
   switch (arguments.length) {
@@ -203,22 +160,24 @@ function rTime(date) {
 }
 
 //判断题目是否正确
-function isRight(yourAnswer,rightAnswer){
+function isRight(yourAnswer, rightAnswer) {
   return yourAnswer == rightAnswer
 }
+
 function isRightToNum(isRight) {
-  if(isRight){
+  if (isRight) {
     return 1
-  }else{
+  } else {
     return 0
   }
 }
+
 function numToIsRight(num) {
-    return num == 1
+  return num == 1
 }
 
 //添加答题记录(要改一下的)
-function addRecord(replyRecord, answer, result, prbm_id, ex_id,s_id){
+function addRecord(replyRecord, answer, result, prbm_id, ex_id, s_id) {
   replyRecord.answer = answer;
   replyRecord.result = result;
   replyRecord.prbm_id = prbm_id;
@@ -238,7 +197,7 @@ function addExamResult(sid, startTime, score, ex_id) {
 }
 
 //改变选项，清楚其他颜色
-function changeOption(abcd,id){
+function changeOption(abcd, id) {
   for (var x of abcd) {
     if (x.id == id) {
       abcd[x.id].isSelected = true
@@ -257,11 +216,11 @@ function removeOptionColor(abcd) {
 }
 
 //创建subResult数组，用来存每种难度的正误数
-function createSubResult(minLevel,maxLevel){
+function createSubResult(minLevel, maxLevel) {
   var subResult = []
   var length = maxLevel - minLevel + 1
   var level = minLevel
-  for (var i = 0;i < length;i++){
+  for (var i = 0; i < length; i++) {
     let subResultObject = {}
     subResultObject.level = level;
     subResultObject.rightTotal = 0;
@@ -273,9 +232,9 @@ function createSubResult(minLevel,maxLevel){
 }
 
 //将数组中的对象转化成字符串
-function arrObjectToStr(arr){
+function arrObjectToStr(arr) {
   var newArr = []
-  for(var i in arr){
+  for (var i in arr) {
     var key = Object.keys(arr[i])[0]
     console.log(key)
     newArr.push(arr[i].key)
@@ -283,9 +242,10 @@ function arrObjectToStr(arr){
   return newArr
 }
 //将LaTex数学公式解析成markdown格式
-function latexToMarkdown(subjects){
+function latexToMarkdown(subjects) {
+  const app = getApp();
   var newSubjects = []
-  for (var i = 0; i < subjects.length;i++){
+  for (var i = 0; i < subjects.length; i++) {
     var subject = subjects[i]
     subject.question = app.towxml(subject.question, 'markdown');
     subject.optionA = app.towxml(subject.optionA, 'markdown');
@@ -297,12 +257,23 @@ function latexToMarkdown(subjects){
   return newSubjects
 }
 
+function isNum(val) {
+  // 先判定是否为number
+  if (typeof val !== 'number') {
+    return false;
+  }
+  if (!isNaN(val)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 module.exports = {
+  isNum: isNum,
   latexToMarkdown: latexToMarkdown,
   addOptions: addOptions,
-  StringBuffer: StringBuffer,
   randomNum: randomNum,
-  request:request,
+  request: request,
   formatTime: formatTime,
   formatTimeStamp: formatTimeStamp,
   rTime: rTime,
@@ -315,6 +286,6 @@ module.exports = {
   removeOptionColor: removeOptionColor,
   createSubResult: createSubResult,
   getScore: getScore,
-  addExamResult:addExamResult,
+  addExamResult: addExamResult,
   arrObjectToStr: arrObjectToStr
 }

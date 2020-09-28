@@ -1,15 +1,16 @@
 // pages/stuIndex/stuIndex.js
 const fuc = require('../../utils/fuc.js')
 const api = require('../../utils/api.js')
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo:{
-      sid:1,
-      sname:'小明',
+    userInfo: {
+      sid: 1,
+      sname: '小明',
       studentid: 17320220301
     },
     time: 1,
@@ -17,7 +18,7 @@ Page({
     exams: []
   },
   //参加考试
-  joinExam:function(e){
+  joinExam: function(e) {
     var that = this;
     console.log(e)
     var i = e.currentTarget.dataset.index;
@@ -32,8 +33,7 @@ Page({
           wx.navigateTo({
             url: '../preExam/preExam?exam=' + JSON.stringify(exam),
           })
-        } else if (res.cancel) {
-        }
+        } else if (res.cancel) {}
       }
     })
 
@@ -43,22 +43,50 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
+    var userInfoNew = wx.getStorageSync("userInfo");
+    console.log(userInfoNew);
+    app.globalData.userInfo = userInfoNew;
+    that.setData({
+      userInfo: userInfoNew
+    })
     fuc.request(api.getExamInfo, {
-      sid: that.data.sid
+      sid: userInfoNew.s_id
     }).then(function(res) {
       var exams = res.data;
       // 时间格式转换
-      for (var i = 0; i<exams.length;i++){
+      for (var i = 0; i < exams.length; i++) {
         exams[i].start_time = fuc.rTime(exams[i].start_time)
         exams[i].end_time = fuc.rTime(exams[i].end_time)
       }
       console.log(exams);
       that.setData({
-        exams:exams
+        exams: exams
       })
     })
   },
-
+  unLogin: function(e) {
+    wx.showModal({
+      title: '退出登录',
+      content: '是否退出登录并清空缓存？',
+      success: function(res) {
+        if (res.cancel) {
+          //点击取消,默认隐藏弹框
+        } else {
+          //点击确定
+          wx.clearStorage()
+          wx.showLoading({
+            title: '注销中',
+            success: function () {
+              wx.reLaunch({
+                url: '../chooseIdentity/chooseIdentity',
+              })
+            }
+          })
+        }
+      }
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

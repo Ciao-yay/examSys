@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/chooseIdentity/chooseIdentity",
     "pages/stuIndex/stuIndex",
     "pages/preExam/preExam",
     "pages/exams/exams",
@@ -13,11 +14,11 @@
     "pages/manageTeach/manageTeach",
     "pages/addTeach/addTeach",
     "pages/publishExam/publishExam",
-    "pages/chooseIdentity/chooseIdentity",
     "pages/test/test",
     "pages/upload/upload",
     "pages/wrongSubs/wrongSubs",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/loginTest/loginTest"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -29,7 +30,7 @@
     "list": [
       {
         "pagePath": "pages/stuIndex/stuIndex",
-        "text": "上传题目",
+        "text": "首页",
         "iconPath": "images/home0.png",
         "selectedIconPath": "images/home1.png",
         "selectedColor": "#1296db"

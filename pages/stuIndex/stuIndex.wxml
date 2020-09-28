@@ -13,13 +13,14 @@
   <!--用户信息-->
   <view class="user">
     <view class="userInfo">
-      <view class="name">{{userInfo.sname}}</view>
-      <view class="userID">{{userInfo.studentid}}</view>
+      <view class="name">{{userInfo.s_name}}</view>
+      <view class="userID">{{userInfo.student_id}}</view>
     </view>
     <view class="other">
-      <view class="set">
+      <!-- <view class="set">
         <image src="../../images/set.png"></image>
-      </view>
+      </view> -->
+      <view class="unLogin" bindtap="unLogin">退出登录</view>
       <view class="toExams">所有测试</view>
     </view>
   </view>
