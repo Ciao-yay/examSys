@@ -44,7 +44,7 @@ Page({
     that.testFuc(1);
   },
   testFuc: function(a) {
-    console.log("现在还不能交卷呢！" + a)
+    // console.log("现在还不能交卷呢！" + a)
   },
   /**
    * 同难度随机换一题（测试用）
@@ -112,11 +112,11 @@ Page({
             } else {
               newSubResult[level - exam.min_level].wrongTotal += 1;
             }
-            console.log(newSubResult);
+            // console.log(newSubResult);
             //获取题目难度
-            console.log(isRight);
+            // console.log(isRight);
             var newLevel = fuc.getLevel(isRight, exam.min_level, exam.max_level, level);
-            console.log(newLevel);
+            // console.log(newLevel);
             if (isRight && newLevel == 0) {
               /**
                * 1、提交试卷
@@ -131,10 +131,23 @@ Page({
                   // console.log(fuc.addExamResult(sid, that.data.startTime, score, exam.ex_id));
                   examResult = fuc.addExamResult(sid, that.data.startTime, score, exam.ex_id)
                   fuc.request(api.commitResult, examResult).then(function(res) {
+                    // console.log(res.data)
+                    if(res.data == 1){
+                      wx.navigateTo({
+                        url: '../examFinished/examFinished?subResult=' + JSON.stringify(newSubResult) + '&score=' + score,
+                      })
+                    }else{
+                      wx.showLoading({
+                        title: '提交失败',
+                      })
+                      setTimeout(function () {
+                        wx.hideLoading()
+                      }, 500)
+                      wx.reLaunch({
+                        url: '../stuIndex/stuIndex',
+                      })
+                    }
 
-                    wx.navigateTo({
-                      url: '../examFinished/examFinished?subResult=' + JSON.stringify(newSubResult) + '&score=' + score,
-                    })
                   })
                 }
               })
@@ -160,9 +173,10 @@ Page({
                     // console.log(''+136+subjects);
                     var i = fuc.randomNum(1, subjects.length) - 1;
                     var subject = fuc.addOptions(subjects[i]);
-                    console.log(subject)
+                    // console.log(subject)
                     //清除选项颜色
                     fuc.removeOptionColor(abcd);
+                    console.log(subject)
                     that.setData({
                       subject: subject,
                       hasDone: that.data.hasDone + 1,
@@ -207,7 +221,7 @@ Page({
     });
     //生成题目记录
     var newSubResult = fuc.createSubResult(exam.min_level, exam.max_level);
-    console.log(newSubResult);
+    // console.log(newSubResult);
     that.setData({
       crsid: exam.crs_id,
       ex_id: exam.ex_id,
@@ -217,7 +231,7 @@ Page({
       subResult: newSubResult
     })
     // console.log(that.data.startTime);
-    console.log(that.data.crsid);
+    // console.log(that.data.crsid);
     /**
      * 初始化第一道题
      */
@@ -225,11 +239,11 @@ Page({
       level: exam.min_level,
       crsid: that.data.crsid,
     }).then(function(res) {
-      console.log(res.data);
+      // console.log(res.data);
       //获取题目对象
       var subjects = res.data;
       var subjects = fuc.latexToMarkdown(subjects);
-      console.log(subjects)
+      // console.log(subjects)
       //生成随机数，从题目对象中随机选一道题目
       var i = fuc.randomNum(1, subjects.length) - 1
       var subject = fuc.addOptions(res.data[i]);

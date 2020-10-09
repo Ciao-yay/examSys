@@ -51,6 +51,10 @@
   width: 32rpx;
   height: 32rpx;
 }
+.unLogin{
+  background-color: red;
+  border-radius: 10rpx;
+}
 .toExams,.toCourses{
   background-color: rgb(0,154,214);
   border-radius: 10%;

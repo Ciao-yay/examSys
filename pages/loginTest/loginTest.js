@@ -33,7 +33,6 @@ Page({
     var isRight = that.data.isRight;
     //先判断格式
     isRight = that.checkIsRight(that.data.studentid);
-    // console.log(typeof that.data.studentid)
     if (isRight) {
       wx.login({
         success: res => {
@@ -48,44 +47,57 @@ Page({
             switch (data[0].statusUser) {
               case -1:
                 //学号输入错误或没有该学生信息
-                console.log("case -1:")
+                // console.log("case -1:")
                 that.reinput();
                 break;
               case 0:
                 //未绑定当前微信号，请先绑定
-                console.log("case 0:")
                 wx.showModal({
-                  title: '账号绑定',
-                  content: '该账号暂未绑定微信，是否绑定当前微信号？',
+                  title: '确认信息',
+                  content: "您的姓名：" + data[0].s_name,
                   success: function(res) {
                     if (res.cancel) {
                       //点击取消,默认隐藏弹框
                     } else {
                       //点击确定
-                      fuc.request(api.bindUser, {
-                        "stuid": data[0].student_id,
-                        "openid": data[1]
-                      }).then(function(res) {
-                        if (res.data = 1) {
-                          wx.setStorageSync("userInfo", data[0]);
-                          wx.showToast({
-                            title: '绑定成功，即将跳转到首页',
-                            icon: 'success',
-                            success: function() {
-                              wx.reLaunch({
-                                url: '../stuIndex/stuIndex',
-                              })
-                            }
-                          })
-                        } else {
-                          wx.showLoading({
-                            title: '绑定失败',
-                          })
+                      wx.showModal({
+                        title: '账号绑定',
+                        content: '该账号暂未绑定微信，是否绑定当前微信号？',
+                        success: function(res) {
+                          if (res.cancel) {
+                            //点击取消,默认隐藏弹框
+                          } else {
+                            //点击确定
+                            fuc.request(api.bindUser, {
+                              "stuid": data[0].student_id,
+                              "openid": data[1]
+                            }).then(function(res) {
+                              if (res.data = 1) {
+                                data[0].s_openid = data[1]
+                                wx.setStorageSync("userInfo", data[0]);
+                                // console.log(wx.getStorageSync("userInfo"))
+                                wx.showToast({
+                                  title: '绑定成功，即将跳转到首页',
+                                  icon: 'success',
+                                  success: function() {
+                                    wx.reLaunch({
+                                      url: '../stuIndex/stuIndex',
+                                    })
+                                  }
+                                })
+                              } else {
+                                wx.showLoading({
+                                  title: '绑定失败',
+                                })
+                              }
+                            })
+                          }
                         }
                       })
                     }
                   }
                 })
+
                 break;
               case 1:
                 //已绑定，直接登录
@@ -121,14 +133,7 @@ Page({
   },
   //检查输入格式是否正确
   checkIsRight: function(val) {
-    // var isNum = fuc.isNum(val)
-    // var len = (val + '').length
-    // // console.log(isNum)
-    // // console.log(len)
-    // var isRightLen = len == 11
-    // return isNum && isRightLen
     var reg = /[0-9]{11}$/
-    console.log(reg.test(val))
     return reg.test(val)
   },
   //给出提示并重新输入

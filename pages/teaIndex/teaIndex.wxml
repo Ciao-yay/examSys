@@ -9,9 +9,7 @@
       <view class="userID">{{userInfo.tno}}</view>
     </view>
     <view class="other">
-      <view class="set">
-        <image src="../../images/set.png"></image>
-      </view>
+      <view class="unLogin" bindtap="unLogin">退出登录</view>
       <view class="toCourses" bindtap="toManageTeach">课程管理</view>
       <view class="toExams">测试管理</view>
     </view>

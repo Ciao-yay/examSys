@@ -3,7 +3,6 @@ const fuc = require('../../utils/fuc.js')
 const api = require('../../utils/api.js')
 const app = getApp()
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -20,17 +19,18 @@ Page({
   //参加考试
   joinExam: function(e) {
     var that = this;
-    console.log(e)
     var i = e.currentTarget.dataset.index;
     //将对象转换成json字符串
     var exam = that.data.exams[i];
-    console.log(exam);
     wx.showModal({
       title: '是否立即参加考试？',
       content: '点击确定立即开始考试！',
       success(res) {
         if (res.confirm) {
-          wx.navigateTo({
+          // wx.navigateTo({
+          //   url: '../preExam/preExam?exam=' + JSON.stringify(exam),
+          // })
+          wx.reLaunch({
             url: '../preExam/preExam?exam=' + JSON.stringify(exam),
           })
         } else if (res.cancel) {}
@@ -43,8 +43,38 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
+    wx.login({
+      success: res => {
+        //发送 res.code 到后台换取 openId, sessionKey, unionId
+        // console.log(res.code);
+        fuc.request(api.getOpenid, {
+          "code": res.code,
+          "appid": app.globalData.appid,
+          "appsecret": app.globalData.appsecret
+        }).then(function (res) {
+          if (res.data == wx.getStorageSync("userInfo").s_openid) {
+            wx.showLoading({
+              title: '加载中',
+            })
+            setTimeout(function () {
+              wx.hideLoading()
+            }, 500)
+          } else {
+            console.log(wx.getStorageSync("userInfo"))
+            wx.showLoading({
+              title: '身份过期',
+              success: function (res) {
+                wx.reLaunch({
+                  url: '../chooseIdentity/chooseIdentity',
+                })
+              }
+            })
+          }
+        })
+
+      }
+    })
     var userInfoNew = wx.getStorageSync("userInfo");
-    console.log(userInfoNew);
     app.globalData.userInfo = userInfoNew;
     that.setData({
       userInfo: userInfoNew
@@ -58,7 +88,6 @@ Page({
         exams[i].start_time = fuc.rTime(exams[i].start_time)
         exams[i].end_time = fuc.rTime(exams[i].end_time)
       }
-      console.log(exams);
       that.setData({
         exams: exams
       })

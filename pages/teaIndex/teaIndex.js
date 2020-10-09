@@ -25,13 +25,38 @@ Page({
    * 跳转到课程详情
    */
   toTeachDes: function(e) {
-    var that =this;
+    var that = this;
     var i = e.currentTarget.dataset.index;
     wx.navigateTo({
       url: '../courseDes/courseDes?course=' + JSON.stringify(that.data.courses[i]) + '&userInfo=' + JSON.stringify(that.data.userInfo),
     })
   },
+  /**
+   * 注销
+   */
+  unLogin: function(e) {
+    wx.showModal({
+      title: '退出登录',
+      content: '是否退出登录并清空缓存？',
+      success: function(res) {
+        if (res.cancel) {
+          //点击取消,默认隐藏弹框
+        } else {
+          //点击确定
+          // wx.clearStorage()
+          wx.showLoading({
+            title: '注销中',
+            success: function() {
+              wx.reLaunch({
+                url: '../chooseIdentity/chooseIdentity',
+              })
+            }
+          })
+        }
+      }
+    })
 
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -53,7 +78,7 @@ Page({
      */
     fuc.request(api.getTeachInfo, {
       tid: that.data.tid
-    }).then(function (res) {
+    }).then(function(res) {
       var newCourses = res.data;
       console.log(newCourses)
       that.setData({

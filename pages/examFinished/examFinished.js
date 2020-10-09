@@ -12,14 +12,17 @@ Page({
     // wx.navigateTo({
     //   url: '../stuIndex/stuIndex',
     // })
-    wx.switchTab({
+    // wx.switchTab({
+    //   url: '../stuIndex/stuIndex',
+    //   success:function(e){
+    //     var page = getCurrentPages().pop()
+    //     console.log(page)
+    //     if(page == undefined || page == null) return;
+    //     page.onLoad();
+    //   }
+    // })
+    wx.reLaunch({
       url: '../stuIndex/stuIndex',
-      success:function(e){
-        var page = getCurrentPages().pop()
-        console.log(page)
-        if(page == undefined || page == null) return;
-        page.onLoad();
-      }
     })
   },
   /**
