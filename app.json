@@ -18,7 +18,8 @@
     "pages/upload/upload",
     "pages/wrongSubs/wrongSubs",
     "pages/my/my",
-    "pages/loginTest/loginTest"
+    "pages/loginTest/loginTest",
+    "pages/pageDesign/pageDesign"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -56,6 +57,5 @@
       }
     ]
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

@@ -10,6 +10,7 @@
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
+		"nodeModules": true,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
@@ -130,6 +131,13 @@
 					"id": -1,
 					"name": "登陆测试",
 					"pathName": "pages/loginTest/loginTest",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "页面设计",
+					"pathName": "pages/pageDesign/pageDesign",
 					"scene": null
 				}
 			]

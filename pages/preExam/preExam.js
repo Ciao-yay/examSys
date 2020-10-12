@@ -147,7 +147,6 @@ Page({
                         url: '../stuIndex/stuIndex',
                       })
                     }
-
                   })
                 }
               })
@@ -159,7 +158,8 @@ Page({
                 // console.log(res.data);
                 //获取题目对象
                 var subjects = res.data;
-                subjects = fuc.latexToMarkdown(subjects);
+                var newSubs = [];
+                newSubs = fuc.latexToMarkdown(subjects);
                 if (isRight) {
                   tittle = "回答正确！",
                     content = "下一题难度增加！"
@@ -171,16 +171,20 @@ Page({
                   success: function(res) {
                     //生成随机数，从题目对象中随机选一道题目
                     // console.log(''+136+subjects);
-                    var i = fuc.randomNum(1, subjects.length) - 1;
-                    var subject = fuc.addOptions(subjects[i]);
+                    var i = fuc.randomNum(1, newSubs.length) - 1;
+                    that.setData({
+                      subject:{}
+                    })
+                    var newSub = {};
+                    newSub = fuc.addOptions(newSubs[i]);
                     // console.log(subject)
                     //清除选项颜色
                     fuc.removeOptionColor(abcd);
-                    console.log(subject)
+                    console.log(newSub)
                     that.setData({
-                      subject: subject,
+                      subject: newSub,
                       hasDone: that.data.hasDone + 1,
-                      subjects: subjects,
+                      subjects: newSubs,
                       level: newLevel,
                       abcd: abcd,
                       yourAnswer: '',

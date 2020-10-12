@@ -1,0 +1,9 @@
+/* pages/pageDesign/pageDesign.wxss */
+.test{
+  margin: 100rpx auto;
+}
+.van-button--primary {
+  margin: 100rpx auto;
+  --button-border-radius: 10px;
+  --button-default-color: #f2f3f5;
+}

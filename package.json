@@ -1,0 +1,19 @@
+{
+  "name": "examsys",
+  "version": "1.0.0",
+  "description": "TODO",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:nciao/exam-sys.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "@vant/weapp": "^1.5.1"
+  }
+}

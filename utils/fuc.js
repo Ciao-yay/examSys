@@ -257,19 +257,19 @@ function latexToMarkdown(subjects) {
   return newSubjects
 }
 
-function isNum(val) {
-  // 先判定是否为number
-  if (typeof val !== 'number') {
-    return false;
-  }
-  if (!isNaN(val)) {
-    return true;
-  } else {
-    return false;
-  }
-}
+// function isNum(val) {
+//   // 先判定是否为number
+//   if (typeof val !== 'number') {
+//     return false;
+//   }
+//   if (!isNaN(val)) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
 module.exports = {
-  isNum: isNum,
+  // isNum: isNum,
   latexToMarkdown: latexToMarkdown,
   addOptions: addOptions,
   randomNum: randomNum,

@@ -1,0 +1,5 @@
+<!--pages/pageDesign/pageDesign.wxml-->
+<van-button type="primary" class="test">按钮</van-button>
+<van-button class="my-button" bind:click="show">
+  默认按钮
+</van-button>
