@@ -24,7 +24,7 @@
   height: 100rpx;
   border-radius: 50%;
 }
-.student,.teacher {
+.student,.teacher,.fastLogin {
   height: 90rpx;
   width: 90%;
   color: white;
@@ -45,7 +45,18 @@ view image{
   height: 450rpx;
   width: 100%;
 }
-.teacher{
+.teacher,.fastLogin{
   margin-top: 10px;
   background: rgb(29, 149, 63);
+}
+#userInfo{
+  width: 80%;
+  text-align: start;
+  margin: 10rpx auto
+}
+#userInfo:nth-child(2){
+  margin-bottom: 15rpx 
+}
+#userInfo:nth-child(1){
+  margin-top: 20rpx 
 }

@@ -1,7 +1,7 @@
 {
   "usingComponents": {
-    "towxml": "/towxml/towxml"
+    "towxml": "/towxml/towxml",
+    "van-count-down": "@vant/weapp/count-down/index"
   },
-
   "navigationBarTitleText": "正在考试"
 }

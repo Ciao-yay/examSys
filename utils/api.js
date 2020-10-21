@@ -1,17 +1,19 @@
-const ApiRootUrl = "https://www.nciao.cn/exam/";
-// const ApiRootUrl = "http://localhost:8080/exam/";
+// const ApiRootUrl = "https://www.nciao.cn/exam/";
+const ApiRootUrl = "http://localhost:8080/exam/";
 const Student = "student/";
 const Teacher = "teacher/";
 const Test = "test/";
 
 module.exports = {
   getOpenid: ApiRootUrl + Test + "getOpenid",//获取openid
+  getExamAllBySid: ApiRootUrl + Student + "getExamAllBySid",//获取考试信息
+  fastLogin: ApiRootUrl + Test + "fastLogin",//获取openid
   bindUser: ApiRootUrl + Test + "bindUser",//绑定用户测试
   loginTest: ApiRootUrl + Test + "loginTest", //登录测试
   getLatexSubject: ApiRootUrl + Teacher + "getLatexSubject", //Latex测试
   publicExamTest: ApiRootUrl + Teacher + "publicExamTest", //发布测试
-  addExamKnow: ApiRootUrl + Teacher + "addExamKnow", //发布测试
-  publicExam: ApiRootUrl + Teacher + "publicExam", //发布测试
+  // addExamKnow: ApiRootUrl + Teacher + "addExamKnow", //发布测试
+  // publicExam: ApiRootUrl + Teacher + "publicExam", //发布测试
   getKnowledgeBycrs_id: ApiRootUrl + Teacher + "getKnowledgeBycrs_id", //获取知识点列表
   getExamInfoByte_id: ApiRootUrl + Teacher + "getExamInfoByte_id", //获取课程列表
   addTeach: ApiRootUrl + Teacher + "addTeach", //获取课程列表

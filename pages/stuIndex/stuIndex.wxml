@@ -21,7 +21,7 @@
         <image src="../../images/set.png"></image>
       </view> -->
       <view class="unLogin" bindtap="unLogin">退出登录</view>
-      <view class="toExams">所有测试</view>
+      <view class="toExams" bindtap="toExams">所有测试</view>
     </view>
   </view>
   <!--标题-->

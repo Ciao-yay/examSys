@@ -129,7 +129,8 @@ Page({
                 success: function(res) {
                   var score = fuc.getScore(newSubResult);
                   // console.log(fuc.addExamResult(sid, that.data.startTime, score, exam.ex_id));
-                  examResult = fuc.addExamResult(sid, that.data.startTime, score, exam.ex_id)
+                  examResult = fuc.addExamResult(that.data.startTime, score, exam.tst_id)
+                  console.log(examResult)
                   fuc.request(api.commitResult, examResult).then(function(res) {
                     // console.log(res.data)
                     if(res.data == 1){

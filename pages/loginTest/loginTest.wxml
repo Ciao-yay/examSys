@@ -18,5 +18,5 @@
 </view>
 <!-- <view class="{{isRight:'hint_right':'hint_wrong'}}" wx:if="{{isIn}}"></view> -->
 <!-- <button  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button> -->
-<button  bindtap="login">登录</button>
+<view class="commit"  bindtap="login">登录</view>
 <!-- <view wx:else>请升级微信版本</view> -->

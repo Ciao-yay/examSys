@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    userInfo: [],
+    isAlive: false
   },
 
   /**
@@ -36,37 +37,62 @@ Page({
       url: '../loginTest/loginTest',
     })
   },
+  fastLogin: function() {
+    wx.showToast({
+      title: '即将跳转到首页',
+      icon: 'success',
+      success: function() {
+        wx.reLaunch({
+          url: '../stuIndex/stuIndex',
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.login({
-      success: res => {
-        //发送 res.code 到后台换取 openId, sessionKey, unionId
-        // console.log(res.code);
-        fuc.request(api.getOpenid, {
-          "code": res.code,
-          "appid": app.globalData.appid,
-          "appsecret": app.globalData.appsecret
-        }).then(function(res) {
-          var userInfo = wx.getStorageSync("userInfo")
-          if (res.data == userInfo.s_openid) {
-            wx.showLoading({
-              title: '跳转中',
-              success: function(res) {
-                wx.reLaunch({
-                  url: '../stuIndex/stuIndex',
-                })
-              }
-            })
-
-          } else {
-
-          }
-        })
-
-      }
+    wx.showLoading({
+      title: '加载中',
+      mask: true
     })
+    var that = this
+    if (wx.getStorageSync("userInfo")) {
+      var userStor = wx.getStorageSync("userInfo")
+      console.log(true, userStor)
+      /**
+       * wx.login
+       */
+      fuc.request(api.fastLogin, {
+        sopenid: userStor.s_openid,
+        stuid: userStor.student_id
+      }).then(function(res) {
+        console.log(res.data)
+        wx.hideLoading()
+        switch (res.data) {
+          case 0:
+            wx.clearStorageSync("userInfo")
+            wx.showModal({
+              title: '缓存失效',
+              content: '缓存失效，请输入账号登录',
+            })
+            break;
+          case 1:
+            that.setData({
+              isAlive: true,
+              userInfo: userStor
+            })
+            break;
+          default:
+            wx.showToast({
+              title: '系统出问题了',
+            })
+            break;
+        }
+      })
+    }else{
+      wx.hideLoading()
+    }
   },
 
   /**

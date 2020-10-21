@@ -7,6 +7,24 @@ Page({
   data: {
 
   },
+  start() {
+    const countDown = this.selectComponent('.control-count-down');
+    countDown.start();
+  },
+
+  pause() {
+    const countDown = this.selectComponent('.control-count-down');
+    countDown.pause();
+  },
+
+  reset() {
+    const countDown = this.selectComponent('.control-count-down');
+    countDown.reset();
+  },
+
+  finished() {
+    Toast('倒计时结束');
+  },
   show:function(e){
     console.log(e)
   },

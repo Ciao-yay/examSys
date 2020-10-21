@@ -34,18 +34,26 @@ view image{
   width: 100%;
 }
 .userid{
-  width: 80%;
-  height: 70rpx;
+  width: 85%;
+  height: 65rpx;
   margin: 30rpx auto;
   padding: 10rpx 20rpx;
-  border-radius: 10rpx;
+  border-radius: 20rpx;
   border: 1rpx solid gray;
 }
 input{
   height: 60rpx;
 }
-button{
-  background: rgb(29, 149, 63);
+
+.commit {
+  height: 90rpx;
+  width: 90%;
   color: white;
-  /* width: 50rpx; */
+  background: rgb(0, 154, 214);
+  box-shadow: 2px 2px 3px rgb(204, 204, 204);
+  border-radius: 20rpx;
+  text-align: center;
+  font-size: 35rpx;
+  line-height: 90rpx;
+  margin: 20rpx auto;
 }

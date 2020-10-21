@@ -68,8 +68,8 @@ function request(url, data = {}) {
       success: function(res) {
         resolve(res);
       },
-      fail: function() {
-        reject();
+      fail: function(err) {
+        reject(err);
       }
     });
   });
@@ -187,12 +187,11 @@ function addRecord(replyRecord, answer, result, prbm_id, ex_id, s_id) {
 }
 
 //添加考试结果数据
-function addExamResult(sid, startTime, score, ex_id) {
+function addExamResult(startTime, score, tst_id) {
   var obj = {}
-  obj.sid = sid;
   obj.startTime = startTime;
   obj.score = score;
-  obj.ex_id = ex_id;
+  obj.tst_id = tst_id;
   return obj;
 }
 

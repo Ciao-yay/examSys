@@ -1,5 +1,9 @@
 <!--pages/pageDesign/pageDesign.wxml-->
-<van-button type="primary" class="test">按钮</van-button>
-<van-button class="my-button" bind:click="show">
-  默认按钮
-</van-button>
+1
+<van-count-down class="control-count-down" millisecond time="{{ 3000 }}" auto-start="{{ false }}" format="ss:SSS" bind:finish="finished" />
+
+<van-grid clickable column-num="3">
+  <van-grid-item text="开始" icon="play-circle-o" bindclick="start" />
+  <van-grid-item text="暂停" icon="pause-circle-o" bindclick="pause" />
+  <van-grid-item text="重置" icon="replay" bindclick="reset" />
+</van-grid>

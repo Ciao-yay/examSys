@@ -10,9 +10,14 @@
 <view class="logoSchool">
   <image src="../../images/school.png"></image>
 </view>
-<view class="teacher" bindtap="toTeaIndex">
+<view id='userInfo' wx:if="{{isAlive}}">学号：{{userInfo.student_id}}</view>
+<view id="userInfo" wx:if="{{isAlive}}">姓名：{{userInfo.s_name}}</view>
+<view class="fastLogin" bindtap="fastLogin" wx:if="{{isAlive}}">
+  快速登录
+</view>
+<view class="teacher" bindtap="toTeaIndex" wx:if="{{!isAlive}}">
   我是老师
 </view>
-<view class="student" bindtap="toStuIndex">
+<view class="student" bindtap="toStuIndex" wx:if="{{!isAlive}}">
   我是学生
 </view>

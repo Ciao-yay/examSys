@@ -1,1 +1,46 @@
 /* pages/exam/exam.wxss */
+.exams{
+  font-size: 9pt;
+  background: #fffffb;
+  width: 100%;
+  height: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15rpx 0 0 0;
+}
+
+.examsItem{
+  width: 90%;
+  height: 150rpx;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: rgb(255,255,255);
+  border-radius:20rpx;
+  box-shadow: 3px 3px 3px rgb(204,204,204);
+  margin: 15rpx 0;
+}
+.itemLeft{
+  width: 5%;
+  height: 150rpx;
+  background: rgb(0,154,214);
+  border-radius:20rpx 0 0 20rpx;
+}
+.itemMiddle{
+  width: 60%;
+}
+.middleDes{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+}
+.itemRight{
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

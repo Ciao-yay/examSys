@@ -1,2 +1,23 @@
 <!--pages/exam/exam.wxml-->
-<text>pages/exam/exam.wxml</text>
+<view class="exams">
+  <view class="examsItem" wx:for="{{exams}}" bindtap="joinExam" data-id="{{item.ex_id}}" data-index="{{index}}">
+    <!--颜色块-->
+    <view class="itemLeft">
+    </view>
+    <!--中间内容：课程名称，发布及截止时间-->
+    <view class="itemMiddle">
+      <view class="middleDes">
+        <view class="courseName">{{item.crs_name}}</view>
+        <view class="sTime">{{item.start_time}}</view>
+        <view class="eTime">{{item.end_time}}</view>
+      </view>
+    </view>
+    <!--测试名，剩余时间-->
+    <view class="itemRight">
+      <view class="examName">{{item.ex_name}}</view>
+      <view class="time">
+        <p>{{item.score? item.score:"待完成"}}</p>
+      </view>
+    </view>
+  </view>
+</view>

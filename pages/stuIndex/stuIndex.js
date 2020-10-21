@@ -16,12 +16,20 @@ Page({
     sid: 1,
     exams: []
   },
+  //查看所有测试
+  toExams:function(e){
+    console.log(e)
+    wx.navigateTo({
+      url: '../exams/exams',
+    })
+  },
   //参加考试
   joinExam: function(e) {
     var that = this;
     var i = e.currentTarget.dataset.index;
     //将对象转换成json字符串
     var exam = that.data.exams[i];
+    console.log(exam)
     wx.showModal({
       title: '是否立即参加考试？',
       content: '点击确定立即开始考试！',
@@ -42,6 +50,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this;
     wx.login({
       success: res => {
@@ -53,13 +65,35 @@ Page({
           "appsecret": app.globalData.appsecret
         }).then(function (res) {
           if (res.data == wx.getStorageSync("userInfo").s_openid) {
-            wx.showLoading({
-              title: '加载中',
+            // console.log('进入true')
+            var userInfoNew = wx.getStorageSync("userInfo");
+            // console.log(userInfoNew)
+            app.globalData.userInfo = userInfoNew;
+            that.setData({
+              userInfo: userInfoNew
             })
-            setTimeout(function () {
-              wx.hideLoading()
-            }, 500)
+            // that.data.userInfo = userInfoNew;
+            fuc.request(api.getExamInfo, {
+              sid: userInfoNew.s_id
+            }).then(function (res) {
+              if(res.data.length>=1){
+              var exams = res.data;
+              // 时间格式转换
+              for (var i = 0; i < exams.length; i++) {
+                exams[i].start_time = fuc.rTime(exams[i].start_time)
+                exams[i].end_time = fuc.rTime(exams[i].end_time)
+              }
+              that.setData({
+                exams: exams
+              })
+                wx.hideLoading()
+              } else {
+                wx.hideLoading()
+               }
+            })
+            
           } else {
+            wx.hideLoading()
             console.log(wx.getStorageSync("userInfo"))
             wx.showLoading({
               title: '身份过期',
@@ -74,24 +108,7 @@ Page({
 
       }
     })
-    var userInfoNew = wx.getStorageSync("userInfo");
-    app.globalData.userInfo = userInfoNew;
-    that.setData({
-      userInfo: userInfoNew
-    })
-    fuc.request(api.getExamInfo, {
-      sid: userInfoNew.s_id
-    }).then(function(res) {
-      var exams = res.data;
-      // 时间格式转换
-      for (var i = 0; i < exams.length; i++) {
-        exams[i].start_time = fuc.rTime(exams[i].start_time)
-        exams[i].end_time = fuc.rTime(exams[i].end_time)
-      }
-      that.setData({
-        exams: exams
-      })
-    })
+
   },
   unLogin: function(e) {
     wx.showModal({

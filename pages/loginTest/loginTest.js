@@ -1,4 +1,4 @@
-// pages/loginTest/loginTest.js
+  // pages/loginTest/loginTest.js
 const fuc = require('../../utils/fuc.js')
 const api = require('../../utils/api.js')
 const app = getApp()
@@ -20,7 +20,6 @@ Page({
 
   },
   getUserid: function(e) {
-
     var that = this;
     var temp = e.detail.value;
     that.setData({
@@ -34,6 +33,10 @@ Page({
     //先判断格式
     isRight = that.checkIsRight(that.data.studentid);
     if (isRight) {
+      wx.showLoading({
+        title: '查询中',
+        mask:true
+      })
       wx.login({
         success: res => {
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -44,6 +47,7 @@ Page({
             "studentid": that.data.studentid
           }).then(function(res) {
             var data = res.data
+            wx.hideLoading();
             switch (data[0].statusUser) {
               case -1:
                 //学号输入错误或没有该学生信息
@@ -86,7 +90,7 @@ Page({
                                   }
                                 })
                               } else {
-                                wx.showLoading({
+                                wx.showToast({
                                   title: '绑定失败',
                                 })
                               }
@@ -97,11 +101,11 @@ Page({
                     }
                   }
                 })
-
                 break;
               case 1:
-                //已绑定，直接登录
+                //已绑定，选择是否直接登录
                 wx.setStorageSync("userInfo", data[0]);
+                // console.log(wx.getStorageSync("userInfo"))
                 wx.showLoading({
                   title: '登录成功，即将跳转到首页',
                   icon: 'success',
