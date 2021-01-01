@@ -1,146 +1,151 @@
 {
-	"description": "项目配置文件",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"nodeModules": true,
-		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		}
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.11.2",
-	"appid": "wx2f6048bbc0d0cd10",
-	"projectname": "%E8%80%83%E8%AF%95%E7%B3%BB%E7%BB%9F",
-	"debugOptions": {
-		"hidedInDevtools": []
-	},
-	"isGameTourist": false,
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"currentL": -1,
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "考试页面",
-					"pathName": "pages/preExam/preExam",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "教师首页",
-					"pathName": "pages/teaIndex/teaIndex",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 2,
-					"name": "授课详情",
-					"pathName": "pages/teachDes/teachDes",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "授课管理",
-					"pathName": "pages/manageTeach/manageTeach",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "添加授课",
-					"pathName": "pages/addTeach/addTeach",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "发布测试",
-					"pathName": "pages/publishExam/publishExam",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "选择身份",
-					"pathName": "pages/chooseIdentity/chooseIdentity",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 7,
-					"name": "Latex数学公式解析测试",
-					"pathName": "pages/test/test",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "完成界面",
-					"pathName": "pages/examFinished/examFinished",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "学生首页",
-					"pathName": "pages/stuIndex/stuIndex",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "登陆测试",
-					"pathName": "pages/loginTest/loginTest",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "页面设计",
-					"pathName": "pages/pageDesign/pageDesign",
-					"scene": null
-				}
-			]
-		}
-	}
+    "description": "项目配置文件",
+    "packOptions": {
+        "ignore": []
+    },
+    "setting": {
+        "urlCheck": true,
+        "es6": true,
+        "enhance": false,
+        "postcss": true,
+        "preloadBackgroundData": false,
+        "minified": true,
+        "newFeature": true,
+        "coverView": true,
+        "nodeModules": true,
+        "autoAudits": false,
+        "showShadowRootInWxmlPanel": true,
+        "scopeDataCheck": false,
+        "uglifyFileName": false,
+        "checkInvalidKey": true,
+        "checkSiteMap": true,
+        "uploadWithSourceMap": true,
+        "compileHotReLoad": false,
+        "useMultiFrameRuntime": false,
+        "useApiHook": true,
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        },
+        "enableEngineNative": false,
+        "bundle": false,
+        "useIsolateContext": true,
+        "useCompilerModule": true,
+        "userConfirmedUseCompilerModuleSwitch": false,
+        "userConfirmedBundleSwitch": false,
+        "packNpmManually": false,
+        "packNpmRelationList": [],
+        "minifyWXSS": true
+    },
+    "compileType": "miniprogram",
+    "libVersion": "2.11.2",
+    "appid": "wx2f6048bbc0d0cd10",
+    "projectname": "%E8%80%83%E8%AF%95%E7%B3%BB%E7%BB%9F%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95%E7%89%88",
+    "debugOptions": {
+        "hidedInDevtools": []
+    },
+    "isGameTourist": false,
+    "simulatorType": "wechat",
+    "simulatorPluginLibVersion": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "id": -1,
+                    "name": "考试页面",
+                    "pathName": "pages/preExam/preExam",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "教师首页",
+                    "pathName": "pages/teaIndex/teaIndex",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 2,
+                    "name": "授课详情",
+                    "pathName": "pages/teachDes/teachDes",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "授课管理",
+                    "pathName": "pages/manageTeach/manageTeach",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "添加授课",
+                    "pathName": "pages/addTeach/addTeach",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "发布测试",
+                    "pathName": "pages/publishExam/publishExam",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 7,
+                    "name": "Latex数学公式解析测试",
+                    "pathName": "pages/test/test",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "页面设计",
+                    "pathName": "pages/pageDesign/pageDesign",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "错题集",
+                    "pathName": "pages/wrongSubs/wrongSubs",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "错误",
+                    "pathName": "pages/err/err",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "错题详情",
+                    "pathName": "pages/wsDetail/wsDetail",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "更新模拟",
+                    "pathName": "pages/chooseIdentity/chooseIdentity",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "所有测试",
+                    "pathName": "pages/exams/exams",
+                    "query": "",
+                    "scene": null
+                }
+            ]
+        }
+    }
 }

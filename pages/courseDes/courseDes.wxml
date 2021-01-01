@@ -19,7 +19,7 @@
     <view class="content" wx:if="{{exams.length<1}}">暂无~</view>
     <view class="content" wx:if="{{exams.length>0}}">
       <view class="exams">
-        <view class="examsItem" wx:for="{{exams}}" bindtap="joinExam" data-id="{{item.ex_id}}" data-index="{{index}}">
+        <view class="examsItem" wx:for="{{exams}}" bindtap="examDetail" data-id="{{item.ex_id}}" data-index="{{index}}">
           <!--颜色块-->
           <view class="itemLeft">
           </view>
@@ -27,14 +27,14 @@
           <view class="itemMiddle">
             <view class="middleDes">
               <view class="courseName">{{item.crs_name}}</view>
-              <view class="sTime">{{item.start_time}}</view>
+              <view class="sTime">{{item.end_time1}}</view>
             </view>
           </view>
           <!--测试名，剩余时间-->
           <view class="itemRight">
             <view class="examName">{{item.ex_name}}</view>
-            <view class="time">发布者
-              <p>{{item.t_name}}</p>
+            <view class="time">
+              <p>{{item.isOut?"已结束":"进行中"}}</p>
             </view>
           </view>
         </view>

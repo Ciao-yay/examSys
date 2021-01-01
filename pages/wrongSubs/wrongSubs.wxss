@@ -1,1 +1,31 @@
 /* pages/wrongSubs/wrongSubs.wxss */
+.addTeach {
+  height: 90rpx;
+  width: 90%;
+  margin: 0 auto;
+  /* margin-top: 20rpx; */
+  background: rgb(255, 255, 255);
+  /* border-radius: 20rpx; */
+  /* box-shadow: 1px 1px 5px rgb(110, 110, 110); */
+  color: rgb(0, 154, 214);
+  font-size: 35rpx;
+  line-height: 90rpx;
+  text-align: center;
+  /* border: 1rpx solid rgb(204, 204, 204) */
+}
+.subItem{
+  border-bottom: 1rpx solid rgb(248,249,250);
+  /* margin-bottom:5rpx ; */
+}
+.itemBottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.wrongTotal{
+  width: 40%;
+  color:rgb(250,128,114);
+}
+.level{
+  width: 40%;
+}

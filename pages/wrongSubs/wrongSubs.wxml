@@ -1,2 +1,28 @@
-<!--pages/wrongSubs/wrongSubs.wxml-->
-<text>pages/wrongSubs/wrongSubs.wxml</text>
+<view wx:if="{{!isShow}}">
+  <van-empty description="没有错题，你一定是学霸吧！" />
+</view>
+<view wx:if="{{isShow}}">
+  <view class="addTeach">
+    <picker bindchange="chooseCourse" value="{{indexCourse}}" range="{{crsNameList}}">
+      {{isCourseSelected?crsNameList[indexCourse]:crsNameList[0]}}
+    </picker>
+  </view>
+  <!-- <view></view> -->
+  <van-collapse value="{{ activeNames }}" bind:change="onChange" wx:for="{{wrongSubs}}" wx:key='id'>
+    <!-- 知识点列表 -->
+    <van-collapse-item title="{{item.knName}}" name="{{item.id}}">
+      <!-- 题目列表 -->
+      <view class="subItem" wx:for="{{item.subs}}" wx:key='re_id' bindtap="toDetail" data-id='{{item.prbm_id}}'>
+        <view class="subQ">
+          <towxml nodes="{{item.question}}" />
+        </view>
+        <view class="itemBottom">
+          <view class="wrongTotal">错误次数：{{item.totalWrong}}</view>
+          <view class="level">
+            <van-rate readonly value="{{ item.level }}" count="{{ 6 }}" size="{{ 15 }}" gutter="{{2}}" />
+          </view>
+        </view>
+      </view>
+    </van-collapse-item>
+  </van-collapse>
+</view>

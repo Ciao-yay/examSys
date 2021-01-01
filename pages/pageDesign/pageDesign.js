@@ -1,4 +1,7 @@
 // pages/pageDesign/pageDesign.js
+const fuc = require('../../utils/fuc')
+const api = require('../../utils/api')
+
 Page({
 
   /**
@@ -25,14 +28,39 @@ Page({
   finished() {
     Toast('倒计时结束');
   },
-  show:function(e){
+  show: function (e) {
     console.log(e)
+  },
+  toErrPage(err) {
+    wx.reLaunch({
+      url: '../err/err?err=' + err,
+
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let that = this
+    wx.showLoading({
+      title: '加载中',
+    })
+    fuc.request(api.getLatexSubject, {}).then(res => {
 
+      console.log(res.data)
+      wx.hideLoading()
+      wx.showLoading({
+        title: '加载中',
+      })
+      return fuc.request(api.teacherTest, {})
+    }, err => {
+      this.toErrPage(err)
+    }).then(res => {
+      console.log(res.data)
+      wx.hideLoading()
+    }, err => {
+      this.toErrPage(err)
+    })
   },
 
   /**

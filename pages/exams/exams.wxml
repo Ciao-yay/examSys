@@ -1,6 +1,9 @@
 <!--pages/exam/exam.wxml-->
-<view class="exams">
-  <view class="examsItem" wx:for="{{exams}}" bindtap="joinExam" data-id="{{item.ex_id}}" data-index="{{index}}">
+<view wx:if="{{!isShow}}">
+  <van-empty description="暂时还没有内容哦" />
+</view>
+<view class="exams" wx:if="{{isShow}}">
+  <view class="examsItem" wx:for="{{exams}}" bindtap="clickExam" data-id="{{item.ex_id}}" data-index="{{index}}">
     <!--颜色块-->
     <view class="itemLeft">
     </view>
@@ -8,15 +11,15 @@
     <view class="itemMiddle">
       <view class="middleDes">
         <view class="courseName">{{item.crs_name}}</view>
-        <view class="sTime">{{item.start_time}}</view>
-        <view class="eTime">{{item.end_time}}</view>
+        <view class="sTime">{{item.end_time1}}</view>
+        <view class="eTime">{{item.isOut?"已结束":"进行中"}}</view>
       </view>
     </view>
     <!--测试名，剩余时间-->
     <view class="itemRight">
       <view class="examName">{{item.ex_name}}</view>
       <view class="time">
-        <p>{{item.score? item.score:"待完成"}}</p>
+        <p>{{item.score>=0&&item.score!=null? item.score:"待完成"}}</p>
       </view>
     </view>
   </view>

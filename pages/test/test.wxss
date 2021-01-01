@@ -1,6 +1,0 @@
-/* pages/test/test.wxss */
-view{
-  width: 98%;
-  height: 150rpx;
-  margin: 0 auto;
-}

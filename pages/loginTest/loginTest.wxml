@@ -13,10 +13,12 @@
 <view class="logoSchool">
   <image src="../../images/school.png"></image>
 </view>
+<form catchsubmit="formSubmit">
 <view class="userid" >
-  <input class="inUserid" bindblur="getUserid" maxlength="11" placeholder="输入11位学号" type="number"></input>
+  <input class="inUserid" name='input'  maxlength="11" placeholder="输入11位学号" type="number"></input>
 </view>
-<!-- <view class="{{isRight:'hint_right':'hint_wrong'}}" wx:if="{{isIn}}"></view> -->
-<!-- <button  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button> -->
-<view class="commit"  bindtap="login">登录</view>
+
+<!-- <view  class="commit"  bindconfirm="login">登录</view> -->
+<button type="primary" formType="submit" class="commit" >登录</button>
+</form>
 <!-- <view wx:else>请升级微信版本</view> -->

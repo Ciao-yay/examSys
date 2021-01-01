@@ -3,20 +3,19 @@
   <view class="addTeach" id="chooseCourse">
     {{course.crs_name}}
   </view>
-  <!-- TODO -->
+  <!-- 截止日期 TODO -->
   <view class="addTeach">
-    <picker bindchange="chooseClass" value="{{indexClass}}" range="{{directionClass}}">
-      
+    <picker  mode="date" start="{{nowDate}}" bindchange="chooseDate" value="{{date}}">
+      {{date}}
     </picker>
-    开始时间
   </view>
-  <!-- TODO -->
-  <view class="addTeach">
-    <picker bindchange="chooseClass" value="{{indexClass}}" range="{{directionClass}}">
-      
+    <!-- 截止时间 TODO -->
+    <view class="addTeach">
+    <picker  mode="time" value="{{time}}" start="{{nowTime}}" bindchange="chooseTime">
+      {{time}}
     </picker>
-    截止时间
   </view>
+  <!-- 测试名 -->
   <view class="addTeach">
 
     test

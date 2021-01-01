@@ -37,21 +37,26 @@ function getLevel(isRight, minLevel, maxLevel, currentLevel) {
  * 分数：每个难度占的分值的和/难度和
  * 
  */
-function getScore(subResult) {
-  var score = 0;
-  var levelTotal = 0;
+function getScore(subResult,maxLevel) {
+  // console.log(maxLevel)
+  let score = 0
+  let levelTotal = 0
+  let base = 4
+  let baseScore = 40
+  levelTotal = ((base+1)+maxLevel+base)*maxLevel/2
   for (var i = 0; i < subResult.length; i++) {
-    var rightTotal = subResult[i].rightTotal
-    var wrongTotal = subResult[i].wrongTotal
-    var total = rightTotal + wrongTotal
-    var level = subResult[i].level
+    let rightTotal = subResult[i].rightTotal
+    let wrongTotal = subResult[i].wrongTotal
+    let total = rightTotal + wrongTotal
+    let level = subResult[i].level+base
     if (total != 0) {
-      score += Math.round(100 * level * rightTotal / total)
-      levelTotal += level
+      score += (100-baseScore) * level * rightTotal / total
     }
+    console.log(score)
   }
-  score = Math.round(score / levelTotal)
-  return score
+  let tempScore = Math.round(score / levelTotal+baseScore)
+  console.log(score,levelTotal,tempScore)
+  return score===0?0:tempScore
 }
 
 /**
@@ -65,12 +70,8 @@ function request(url, data = {}) {
       header: {
         "Content-Type": "application/json"
       }, // 设置请求的 header
-      success: function(res) {
-        resolve(res);
-      },
-      fail: function(err) {
-        reject(err);
-      }
+      success: res => resolve(res),
+      fail: err => reject(err)
     });
   });
 }
@@ -101,18 +102,18 @@ function addOptions(subject) {
 }
 
 //生成从minNum到maxNum的随机数
-function randomNum(minNum, maxNum) {
-  switch (arguments.length) {
-    case 1:
-      return parseInt(Math.random() * minNum + 1, 10);
-      break;
-    case 2:
-      return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
-      break;
-    default:
-      return 0;
-      break;
-  }
+// function randomNum(maxNum) {
+//   switch (arguments.length) {
+//     case 1:
+//       return parseInt(Math.random() + 1, 10)-1;
+//     case 2:
+//       return parseInt(Math.random() * maxNum + 1, 10)-1;
+//     default:
+//       return 0;
+//   }
+// }
+function randomNum(maxNum) {
+  return parseInt(Math.random() * maxNum + 1, 10)-1;
 }
 //时间戳转换为时间
 function formatTime(number, format) {
@@ -165,31 +166,38 @@ function isRight(yourAnswer, rightAnswer) {
 }
 
 function isRightToNum(isRight) {
-  if (isRight) {
-    return 1
-  } else {
-    return 0
-  }
+  return isRight?1:0
 }
 
 function numToIsRight(num) {
   return num == 1
 }
 
+// 判断是否能开始新的考试
+function isFree(exams){
+  for(var i=0,len=exams.length;i<len;i++){
+    if(exams[i].status == 1 && !exams[i].isOut){
+      return i;
+    }
+    return -1;
+  }
+}
+
 //添加答题记录(要改一下的)
-function addRecord(replyRecord, answer, result, prbm_id, ex_id, s_id) {
-  replyRecord.answer = answer;
-  replyRecord.result = result;
-  replyRecord.prbm_id = prbm_id;
-  replyRecord.ex_id = ex_id;
-  replyRecord.s_id = s_id;
-  return replyRecord;
+function addRecord( answer, result, prbm_id, ex_id, s_id,tst_id) {
+  var obj = {}
+  obj.answer = answer;
+  obj.result = result;
+  obj.prbm_id = prbm_id;
+  obj.ex_id = ex_id;
+  obj.s_id = s_id;
+  obj.tst_id = tst_id
+  return obj;
 }
 
 //添加考试结果数据
-function addExamResult(startTime, score, tst_id) {
+function addExamResult(score, tst_id) {
   var obj = {}
-  obj.startTime = startTime;
   obj.score = score;
   obj.tst_id = tst_id;
   return obj;
@@ -267,24 +275,43 @@ function latexToMarkdown(subjects) {
 //     return false;
 //   }
 // }
+function formatExams(exams){
+  let ptime = ''
+  let etime = ''
+  let now = ''
+  for (var i = 0; i < exams.length; i++) {
+    ptime = new Date(exams[i].public_time)
+    etime = new Date(exams[i].end_time)
+    exams[i].public_time1 = `${ptime.getFullYear()}-${ptime.getMonth()+1}-${ptime.getDate()} ${ptime.toLocaleTimeString('chinese', { hour12: false })}`.substr(0,19)
+    exams[i].end_time1 = `${etime.getFullYear()}-${etime.getMonth()+1}-${etime.getDate()} ${etime.toLocaleTimeString('chinese', { hour12: false })}`.substr(0,19)
+    exams[i].isOut = false
+    now = new Date()
+    if(now>etime){
+      exams[i].isOut = true
+    }
+  }
+  return exams
+}
 module.exports = {
   // isNum: isNum,
-  latexToMarkdown: latexToMarkdown,
-  addOptions: addOptions,
-  randomNum: randomNum,
-  request: request,
-  formatTime: formatTime,
-  formatTimeStamp: formatTimeStamp,
-  rTime: rTime,
-  getLevel: getLevel,
-  isRight: isRight,
-  isRightToNum: isRightToNum,
-  numToIsRight: numToIsRight,
-  addRecord: addRecord,
-  changeOption: changeOption,
-  removeOptionColor: removeOptionColor,
-  createSubResult: createSubResult,
-  getScore: getScore,
-  addExamResult: addExamResult,
-  arrObjectToStr: arrObjectToStr
+  formatExams,
+  isFree,
+  latexToMarkdown,
+  addOptions,
+  randomNum,
+  request,
+  formatTime,
+  formatTimeStamp,
+  rTime,
+  getLevel,
+  isRight,
+  isRightToNum,
+  numToIsRight,
+  addRecord,
+  changeOption,
+  removeOptionColor,
+  createSubResult,
+  getScore,
+  addExamResult,
+  arrObjectToStr
 }

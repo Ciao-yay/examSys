@@ -1,0 +1,2 @@
+<!--pages/err/err.wxml-->
+<van-empty image="error" description="服务器开小差了，请稍后再试" />

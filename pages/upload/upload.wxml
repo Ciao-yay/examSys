@@ -1,2 +1,2 @@
 <!--pages/upload/upload.wxml-->
-<text>pages/upload/upload.wxml</text>
+<van-empty description="暂时还没有内容哦" />

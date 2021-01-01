@@ -8,79 +8,120 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // userInfo: app.globalData.userInfo
-    exams: []
+    userInfo: {},
+    exams: [],
+    isShow: false
   },
-
+  /**
+   *  点击判断status
+   *  0进入测试
+   *  1继续完成测试
+   *  2查看分数、答题记录
+   */
+  clickExam(e) {
+    let that = this
+    let i = e.currentTarget.dataset.index
+    let exam = that.data.exams[i]
+    let userInfo = that.data.userInfo
+    console.log(e, exam.status)
+    /* 已完成，点击查看成绩 */
+    /* 待完成，先看时间截止没，再看有不有待做的，然后是进入考试 */
+    switch (exam.status) {
+      /* 待完成，先看有不有待完成 */
+      case 0:
+        // 判断是否结束
+        if (exam.isOut) {
+          // 考试结束
+          that.examOut()
+        } else {
+          // 参加考试
+          if (userInfo.todo >= 0) {
+            wx.showModal({
+              tittle: '不能进行当前考试',
+              content: `还有测试${that.data.exams[todo].ex_name}未完成，是否先去完成${that.data.exams[todo].ex_name}`,
+              success: res => {
+                if (res.confirm) {
+                  exam = that.data.exams[todo]
+                  that.joinExam(exam)
+                }
+              }
+            })
+          } else {
+            console.log(`参加考试`)
+            that.joinExam(exam)
+          }
+        }
+        break
+      case 1:
+        // 判断是否结束
+        if (exam.isOut) {
+          // 考试结束
+          that.examOut()
+        } else {
+          that.joinExam(exam)
+        }
+        break
+        /* 已完成，查看详细情况 */
+      case 2:
+        wx.navigateTo({
+          url: '../examDes/examDes?exam=' + JSON.stringify(exam),
+        })
+        break
+    }
+    // console.log(exam)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    var that = this
-    var data = {}
-    data.sid = app.globalData.userInfo.s_id
-    console.log(data)
-    fuc.request(api.getExamAllBySid, data).then(function(res) {
-      var exams = res.data;
-      // 时间格式转换
-      for (var i = 0; i < exams.length; i++) {
-        exams[i].start_time = fuc.rTime(exams[i].start_time)
-        exams[i].end_time = fuc.rTime(exams[i].end_time)
+  onLoad: function (options) {
+    let that = this
+    let sid = app.globalData.userInfo.s_id
+    // let sid = 10
+    that.data.userInfo = app.globalData.userInfo
+    // that.data.userInfo = wx.getStorageSync('userInfo')
+    fuc.request(api.getExamAllBySid, {
+      sid
+    }).then(function (res) {
+      if (res.data != null && res.data.length > 0) {
+        var exams = res.data;
+        // 时间格式转换
+        exams = fuc.formatExams(exams)
+        that.setData({
+          exams: res.data,
+          isShow: true
+        })
+      } else {
+        that.setData({
+          isShow: false
+        })
       }
-      console.log(res.data)
-      that.setData({
-        exams:res.data
-      })
     })
-    
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
+  /* 自定义函数 */
+  joinExam(exam) {
+    let title = "是否立即参加考试？"
+    let content = "点击确定立即开始考试！"
+    if (exam.status == 1) {
+      title = "继续答题？"
+      content = "当前考试还未完成，点击确定继续答题！"
+    }
+    wx.showModal({
+      title,
+      content,
+      success: res => {
+        if (res.cancel) {} else {
+          wx.reLaunch({
+            url: '../preExam/preExam?exam=' + JSON.stringify(exam),
+          })
+        }
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
+  /* 考试过期 */
+  examOut() {
+    wx.showModal({
+      title: '时间已过',
+      content: '当前时间已超过截止时间，不能进行考试'
+    })
   }
 })

@@ -22,7 +22,7 @@
 
   <view class="courseList">
     <view class="courses">
-      <view class="coursesItem" wx:for="{{courses}}" bindtap="toTeachDes" data-index="{{index}}">
+      <view class="coursesItem" wx:for="{{courses}}" bindtap="toTeachDes" data-index="{{index}}" wx:key="te_id">
         <view class="itemHead">
           <view class="courseName">{{item.crs_name}}</view>
           <view class="teacherName">{{userInfo.t_name}}</view>

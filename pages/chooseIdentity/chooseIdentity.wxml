@@ -12,8 +12,11 @@
 </view>
 <view id='userInfo' wx:if="{{isAlive}}">学号：{{userInfo.student_id}}</view>
 <view id="userInfo" wx:if="{{isAlive}}">姓名：{{userInfo.s_name}}</view>
-<view class="fastLogin" bindtap="fastLogin" wx:if="{{isAlive}}">
+<view class="login" id="fastLogin" bindtap="fastLogin" wx:if="{{isAlive}}">
   快速登录
+</view>
+<view class="login" id="inputLogin" bindtap="inputLogin" wx:if="{{isAlive}}">
+  账号登录
 </view>
 <view class="teacher" bindtap="toTeaIndex" wx:if="{{!isAlive}}">
   我是老师

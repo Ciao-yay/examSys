@@ -92,7 +92,7 @@
   background-color: white;
   color:rgb(0, 154, 214);
   /* box-shadow: 2px 2px 2px rgb(204, 204, 204); */
-  position: absolute;
+  position: fixed;
   bottom: 240rpx;
   right: 10rpx;
   border:1rpx solid rgb(204, 204, 204);
@@ -101,7 +101,7 @@
 .bottom {
   height: 200rpx;
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 20rpx;
   background-color: rgba(255,255,255,0.8);
 }

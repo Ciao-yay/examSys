@@ -1,6 +1,6 @@
 <!--pages/stuIndex/stuIndex.wxml-->
 <view class="body">
-<!-- <view class="line"></view> -->
+  <!-- <view class="line"></view> -->
   <view class="head">
     <view class="logo">
       <image src="../../images/logo.png"></image>
@@ -30,9 +30,12 @@
   </view>
   <!--考试列表-->
   <!--未完成-->
-  <view class="todo">
+  <view wx:if="{{!isShow}}">
+    <van-empty description="暂时没有考试" />
+  </view>
+  <view class="todo" wx:if="{{isShow}}">
     <view class="exams">
-      <view class="examsItem" wx:for="{{exams}}" bindtap="joinExam" data-id="{{item.ex_id}}" data-index="{{index}}">
+      <view class="examsItem" wx:for="{{exams}}" bindtap="joinExam" data-id="{{item.ex_id}}" data-index="{{index}}" wx:key="re_id">
         <!--颜色块-->
         <view class="itemLeft">
         </view>
@@ -40,14 +43,14 @@
         <view class="itemMiddle">
           <view class="middleDes">
             <view class="courseName">{{item.crs_name}}</view>
-            <view class="sTime">{{item.start_time}}</view>
-            <view class="eTime">{{item.end_time}}</view>
+            <view class="sTime" >{{item.end_time1}}</view>
+            <view class="eTime">{{item.isOut?"已结束":"进行中"}}</view>
           </view>
         </view>
         <!--测试名，剩余时间-->
         <view class="itemRight">
           <view class="examName">{{item.ex_name}}</view>
-          <view class="time">发布者
+          <view class="time">
             <p>{{item.t_name}}</p>
           </view>
         </view>

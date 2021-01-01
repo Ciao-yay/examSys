@@ -48,6 +48,18 @@ Page({
       }
     })
   },
+  inputLogin:function(){
+    wx.showLoading({
+      title: '切换中',
+    })
+    var that = this
+    wx.clearStorageSync("userInfo")
+    that.setData({
+      isAlive:false,
+      userInfo:null
+    })
+    wx.hideLoading()
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -12,6 +12,13 @@ Page({
     isShow: false,
     exams: []
   },
+  /* 考试详情 */
+  examDetail(){
+    /* 
+      进入一个新的页面？
+
+    */
+  },
   /**
    * 跳转到发布测试页面
    */
@@ -53,64 +60,13 @@ Page({
       te_id: newCourse.te_id
     }).then(function(res) {
       var exams = res.data;
+      // console.log(exams);
       // 时间格式转换
-      for (var i = 0; i < exams.length; i++) {
-        exams[i].start_time = fuc.rTime(exams[i].start_time)
-        exams[i].end_time = fuc.rTime(exams[i].end_time)
-      }
+      exams = fuc.formatExams(exams)
       console.log(exams);
       that.setData({
         exams: exams
       })
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
 })

@@ -27,6 +27,7 @@ Page({
   toTeachDes: function(e) {
     var that = this;
     var i = e.currentTarget.dataset.index;
+    console.log(that.data.courses[i],that.data.userInfo)
     wx.navigateTo({
       url: '../courseDes/courseDes?course=' + JSON.stringify(that.data.courses[i]) + '&userInfo=' + JSON.stringify(that.data.userInfo),
     })

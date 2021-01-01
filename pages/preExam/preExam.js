@@ -7,28 +7,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sid: app.globalData.sid,
-    abcd: app.globalData.abcd,
-    tittle: "回答错误！",
-    content: "下一题难度降低，请继续作答！",
-    ex_id: 0,
-    yourAnswer: '',
-    isRight: true,
-    prePrbm_id: 0,
-    level: 0,
-    crsid: 0,
-    countDown: "00:09:59",
+    userInfo: app.globalData.userInfo,
     exam: {},
+    hasDone: 0,
     subject: {},
     subjects: [],
-    data: {},
-    hasDone: 0,
-    startTime: '',
-    subResult: [],
+    abcd: app.globalData.abcd,
+    yourAnswer: '',
+    isRight: true,
+    subResult: [{
+      "rightTotal": 0,
+      "wrongTotal": 0,
+      "level": 1
+    }],
     isLoading: true, // 判断是否尚在加载中
+    countDown: false
   },
   //单选，选中的选项变色，其他选项恢复正常
-  selectFuc: function(e) {
+  selectFuc: function (e) {
     // console.log(arguments)
     var id = e.currentTarget.dataset.id;
     var abcd = this.data.abcd;
@@ -38,275 +34,358 @@ Page({
       yourAnswer: abcd[id].name
     });
   },
-
-  commitFuc: function(e) {
-    var that = this;
-    that.testFuc(1);
-  },
-  testFuc: function(a) {
-    // console.log("现在还不能交卷呢！" + a)
-  },
   /**
-   * 同难度随机换一题（测试用）
+   * 按等级获取题目
+   * @param {*} e 
    */
-  changeSubject: function(e) {
-    var that = this;
-    that.changeSubFuc(that.data.subjects);
 
-  },
-  //难度不变的情况下切换题目
-  changeSubFuc: function(subjects) {
-    var that = this;
-    //生成随机数，从题目对象中随机选一道题目
-    var i = fuc.randomNum(1, subjects.length) - 1
-    var subject = fuc.addOptions(subjects[i]);
-    that.setData({
-      subject: subject,
-      abcd: fuc.removeOptionColor(that.data.abcd),
-      yourAnswer: ''
-    });
-  },
   /**
    * 提交并开始下一题（测试用）
    */
-  nextSubject: function(e) {
-    var that = this;
-    var yourAnswer = that.data.yourAnswer;
-    var subject = that.data.subject;
-    var replyRecord = that.data.data;
-    var isRight = fuc.isRight(yourAnswer, subject.answer);
-    var isRightNum = fuc.isRightToNum(isRight); //0（错误）或1（正确），数据库字段需要
-    var level = that.data.level;
-    var exam = that.data.exam;
-    var content = that.data.content;
-    var tittle = that.data.tittle;
-    var abcd = that.data.abcd;
-    var sid = that.data.sid;
-    var level = that.data.level;
-    var newSubResult = that.data.subResult;
-    var examResult = {}
-    // console.log(sid);
-    // console.log(isRight + '' + abcd);
+  nextSubject(e) {
+    let that = this
+    let {
+      subject,
+      yourAnswer,
+      exam,
+      abcd,
+      subjects,
+      subResult
+    } = that.data
+    let isRight = fuc.isRight(yourAnswer, subject.answer)
+    let isRightNum = fuc.isRightToNum(isRight)
+    let replyRecord = {}
+    // console.log(that.data.userInfo)
+    let sid = app.globalData.userInfo.s_id;
+    // console.log(subject,yourAnswer,exam,abcd)
     wx.showModal({
       title: '提交题目',
       content: '是否提交本题答案并开始下一题？',
       success(res) {
         if (res.confirm) {
+          wx.showLoading({
+            title: '提交中',
+          })
           if (yourAnswer != '') {
-            /**
-             * 1、添加答题记录
-             * 2、判断答案是否正确
-             * 3、获取题目难度
-             */
-            //添加传入数据
-            // console.log(sid);
-            replyRecord = fuc.addRecord(replyRecord, yourAnswer, isRightNum, subject.prbm_id, that.data.ex_id, sid);
-            //  console.log(replyRecord);
             //添加答题记录
-            fuc.request(api.addReplyRecord, replyRecord).then(function(res) {
-              // console.log(res);
-            })
-            //记录答题正误数
-            if (isRight) {
-              newSubResult[level - exam.min_level].rightTotal += 1;
-            } else {
-              newSubResult[level - exam.min_level].wrongTotal += 1;
-            }
-            // console.log(newSubResult);
-            //获取题目难度
-            // console.log(isRight);
-            var newLevel = fuc.getLevel(isRight, exam.min_level, exam.max_level, level);
-            // console.log(newLevel);
-            if (isRight && newLevel == 0) {
-              /**
-               * 1、提交试卷
-               * 2、生成完整试卷，生成成绩
-               * 3、跳转到考试结束页面
-               */
-              wx.showModal({
-                title: '考试结束！',
-                content: '前往查看成绩！',
-                success: function(res) {
-                  var score = fuc.getScore(newSubResult);
-                  // console.log(fuc.addExamResult(sid, that.data.startTime, score, exam.ex_id));
-                  examResult = fuc.addExamResult(that.data.startTime, score, exam.tst_id)
-                  console.log(examResult)
-                  fuc.request(api.commitResult, examResult).then(function(res) {
-                    // console.log(res.data)
-                    if(res.data == 1){
-                      wx.navigateTo({
-                        url: '../examFinished/examFinished?subResult=' + JSON.stringify(newSubResult) + '&score=' + score,
-                      })
-                    }else{
+            replyRecord = fuc.addRecord(yourAnswer, isRightNum, subject.prbm_id, exam.ex_id, sid, exam.tst_id)
+            let hasDoneL = 0 //同等级难度一共做的题目量
+            let newSubResult = subResult //更新答题记录
+            fuc.request(api.addReplyRecord, replyRecord).then((res, err) => {
+              if (res.data == 1) {
+                for (let i = 0; i < subResult.length; i++) {
+                  if (subject.level == subResult[i].level) {
+                    if (isRight) {
+                      newSubResult[i].rightTotal += 1
+                    } else {
+                      newSubResult[i].wrongTotal += 1
+                    }
+                    let total = newSubResult[i].rightTotal + newSubResult[i].wrongTotal
+                    hasDoneL = total > hasDoneL ? total : hasDoneL
+                    break
+                  }
+                  if (i == subResult.length - 1) {
+                    newSubResult.push({
+                      rightTotal: isRight ? 1 : 0,
+                      wrongTotal: isRight ? 0 : 1,
+                      level: subject.level
+                    })
+                  }
+                }
+                that.data.subResult = newSubResult
+                wx.hideLoading()
+                wx.showLoading({
+                  title: '加载中',
+                })
+                //获取题目难度
+                let newLevel = fuc.getLevel(isRight, exam.min_level, exam.max_level, subject.level);
+                if ((isRight && newLevel == 0) || hasDoneL >= 5) {
+                  /**
+                   * 1、提交试卷
+                   * 2、生成完整试卷，生成成绩
+                   * 3、跳转到考试结束页面
+                   */
+                  wx.hideLoading()
+                  that.commitResult(exam)
+                } else {
+                  let tittle = "回答错误！"
+                  let content = "下一题难度降低！"
+                  if (isRight) {
+                    tittle = "回答正确！"
+                    content = "下一题难度增加！"
+                  }
+                  wx.hideLoading()
+                  wx.showModal({
+                    title: tittle,
+                    content: content,
+                    showCancel: false,
+                    success: function (res) {
                       wx.showLoading({
-                        title: '提交失败',
+                        title: '加载中',
                       })
-                      setTimeout(function () {
-                        wx.hideLoading()
-                      }, 500)
-                      wx.reLaunch({
-                        url: '../stuIndex/stuIndex',
+                      let subjectsL = subjects.filter(item => item.level === newLevel)
+                      /* 初始题目 */
+                      let i = fuc.randomNum(subjectsL.length);
+                      // console.log(i,subjectsL,subjectsL[i])
+                      that.setData({
+                        subject: {}
                       })
+                      subject = fuc.addOptions(subjectsL[i])
+                      // console.log(subject)
+                      //清除选项颜色
+                      fuc.removeOptionColor(abcd);
+                      that.data.yourAnswer = ''
+                      that.data.isRight = false,
+                        that.setData({
+                          subject,
+                          hasDone: that.data.hasDone + 1,
+                          abcd: abcd,
+                          isLoading: false
+                        });
+                      wx.hideLoading()
                     }
                   })
                 }
-              })
-            } else {
-              fuc.request(api.test, {
-                level: newLevel,
-                crsid: that.data.crsid,
-              }).then(function(res) {
-                // console.log(res.data);
-                //获取题目对象
-                var subjects = res.data;
-                var newSubs = [];
-                newSubs = fuc.latexToMarkdown(subjects);
-                if (isRight) {
-                  tittle = "回答正确！",
-                    content = "下一题难度增加！"
-                }
-                wx.showModal({
-                  title: tittle,
-                  content: content,
-                  showCancel: false,
-                  success: function(res) {
-                    //生成随机数，从题目对象中随机选一道题目
-                    // console.log(''+136+subjects);
-                    var i = fuc.randomNum(1, newSubs.length) - 1;
-                    that.setData({
-                      subject:{}
-                    })
-                    var newSub = {};
-                    newSub = fuc.addOptions(newSubs[i]);
-                    // console.log(subject)
-                    //清除选项颜色
-                    fuc.removeOptionColor(abcd);
-                    console.log(newSub)
-                    that.setData({
-                      subject: newSub,
-                      hasDone: that.data.hasDone + 1,
-                      subjects: newSubs,
-                      level: newLevel,
-                      abcd: abcd,
-                      yourAnswer: '',
-                      isRight: false,
-                      subResult: newSubResult,
-                      isLoading:false
-                    });
-                  }
-                })
-              })
-            }
+              } else {
+                console.log(err)
+              }
+            })
           } else {
+            wx.hideLoading()
             wx.showModal({
               title: '无法提交！',
               content: '当前还未作答，无法提交，请先完成本题！',
             })
           }
-        } else if (res.cancel) {}
+        }
       }
+    })
+  },
+  /**
+   * 处理错误，跳转到错误页面
+   * @param {*} err 
+   */
+  toErrPage(err) {
+    wx.reLaunch({
+      url: '../err/err?err=' + err,
     })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    var that = this
+  onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    let that = this
+    let exam = JSON.parse(options.exam)
+    that.data.exam = exam
+    let etime = new Date(exam.end_time).getTime()
+    let ntime = new Date().getTime()
+    console.log(ntime, etime)
+    if (ntime > etime) {
+      wx.showLoading({
+        title: '考试已结束',
+        mask: true
+      })
+      setTimeout(() => {
+        wx.hideLoading({
+          success: (res) => {
+            console.log("考试已结束")
+            wx.reLaunch({
+              url: '../stuIndex/stuIndex',
+            })
+          },
+        })
+      }, 2000)
+    } else {
+      /* 自动提交 */
+      setTimeout(() => {
+        that.commitResult(exam)
+      }, (etime - ntime))
+      that.countDown()
+      let newLevel = 1
+      let subjectsL = []
+      let subjects = []
+      /**
+       * 先获取考试状态（从上个页面传过来）
+       *    看tst.status,1为进行中、0为未开始、2为已完成
+       *    1:
+       *      接着做，查答题记录，计算下一题难度
+       *    0：
+       *      初始化
+       */
 
-    /**
-     * 接收考试信息,将json字符串转换成对象
-     */
-    var exam = JSON.parse(options.exam);
-    // console.log(exam);
-    //获取开始答题时间
-    var time = new Date();
-    var startTime = time.toLocaleString('chinese', {
-      hour12: false
-    });
-    //生成题目记录
-    var newSubResult = fuc.createSubResult(exam.min_level, exam.max_level);
-    // console.log(newSubResult);
+      let getNewLevel = new Promise((resolve, reject) => {
+        if (exam.status === 0) {
+          /* 更改考试状态 */
+          fuc.request(api.toTodo, {
+            tstid: exam.tst_id
+          }).then(res => {
+            if (res.data == -1) {
+              let err = "服务器错误！"
+              reject(err)
+            }
+            console.log(`没查询`)
+            resolve(newLevel)
+          })
+        } else {
+          /* 查看记录 */
+          fuc.request(api.hasRecord, {
+            tstid: exam.tst_id
+          }).then(res => {
+            // console.log(res)
+            if (res.data != -1) {
+              console.log(res)
+              that.setData({
+                hasDone: res.data.hasDone
+              })
+              that.data.subResult = res.data.result
+              let tempLevel = res.data.recentRecord.level
+              let tempResult = res.data.recentRecord.result
+              console.log(tempLevel, tempResult)
+              if (tempResult == 0) {
+                if (tempLevel == 1) {
+                  newLevel = tempLevel
+                } else {
+                  newLevel = tempLevel - 1
+                }
+              } else {
+                newLevel = tempLevel + 1
+              }
+
+            }
+            if (res.data == -1) {
+              let err = "服务器错误！"
+              reject(err)
+              //错误处理
+            }
+            console.log(`查询过`)
+            resolve(newLevel)
+          }, err => {
+            console.log(err)
+            reject(err)
+          })
+        }
+      })
+      /* 获取考试列表 */
+      getNewLevel.then(level => {
+        console.log(level)
+        return level > exam.max_level ? that.commitResult(exam) : fuc.request(api.tGetSubjects, {
+          level,
+          exid: exam.ex_id
+        })
+      }, err => {
+        console.log(err)
+      }).then(res => {
+        // console.log(res)
+        if (res.data) {
+          subjects = res.data
+          fuc.latexToMarkdown(subjects);
+          that.data.subjects = subjects
+          // console.log(subjects)
+          subjectsL = subjects.filter(item => item.level === newLevel)
+          /* 初始题目 */
+          let i = fuc.randomNum(subjectsL.length);
+          // console.log(i,subjectsL,subjectsL[i])
+          let subject = fuc.addOptions(subjectsL[i])
+          console.log(subject)
+          that.setData({
+            subject
+          })
+          wx.hideLoading()
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  },
+  // 倒计时
+  countDown: function () {
+    var that = this;
+    var nowTime = new Date().getTime(); //现在时间（时间戳）
+    var endTime = new Date(that.data.exam.end_time).getTime(); //结束时间（时间戳）
+    var time = (endTime - nowTime) / 1000; //距离结束的毫秒数
+    // 获取天、时、分、秒
+    let day = parseInt(time / (60 * 60 * 24));
+    let hou = parseInt(time % (60 * 60 * 24) / 3600);
+    let min = parseInt(time % (60 * 60 * 24) % 3600 / 60);
+    let sec = parseInt(time % (60 * 60 * 24) % 3600 % 60);
+    // console.log(day + "," + hou + "," + min + "," + sec)
+    day = that.timeFormin(day),
+      hou = that.timeFormin(hou),
+      min = that.timeFormin(min),
+      sec = that.timeFormin(sec)
     that.setData({
-      crsid: exam.crs_id,
-      ex_id: exam.ex_id,
-      level: exam.min_level,
-      exam: exam,
-      startTime: startTime,
-      subResult: newSubResult
+      day: that.timeFormat(day),
+      hou: that.timeFormat(hou),
+      min: that.timeFormat(min),
+      sec: that.timeFormat(sec)
     })
-    // console.log(that.data.startTime);
-    // console.log(that.data.crsid);
-    /**
-     * 初始化第一道题
-     */
-    fuc.request(api.test, {
-      level: exam.min_level,
-      crsid: that.data.crsid,
-    }).then(function(res) {
-      // console.log(res.data);
-      //获取题目对象
-      var subjects = res.data;
-      var subjects = fuc.latexToMarkdown(subjects);
-      // console.log(subjects)
-      //生成随机数，从题目对象中随机选一道题目
-      var i = fuc.randomNum(1, subjects.length) - 1
-      var subject = fuc.addOptions(res.data[i]);
+    // 每1000ms刷新一次
+    if (time > 0) {
       that.setData({
-        subject: subject,
-        hasDone: 0,
-        subjects: subjects,
-        isLoading: false
-      });
+        countDown: true
+      })
+      setTimeout(this.countDown, 1000);
+    } else {
+      that.setData({
+        countDown: false
+      })
+    }
+  },
+  //小于10的格式化函数（2变成02）
+  timeFormat(param) {
+    return param < 10 ? '0' + param : param;
+  },
+  //小于0的格式化函数（不会出现负数）
+  timeFormin(param) {
+    return param < 0 ? 0 : param;
+  },
+  // 提交测试
+  commitResult(exam) {
+    wx.showLoading({
+      title: '考试结束',
+      mask: true
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
+    let score
+    fuc.request(api.hasRecord, {
+      tstid: exam.tst_id
+    }).then(res => {
+      // console.log(res.data.hasDone)
+      if (res.data.hasDone == 0) {
+        score = 0
+      } else {
+        let subResult = res.data.result
+        score = fuc.getScore(subResult, exam.max_level)
+      }
+      console.log(exam.max_level, score)
+      let examResult = fuc.addExamResult(score, exam.tst_id)
+      return fuc.request(api.commitResult, examResult)
+    }).catch(err => {
+      console.log(err)
+    }).then(res => {
+      if (res.data == 1) {
+        wx.reLaunch({
+          url: '../examFinished/examFinished?score=' + score,
+        })
+      } else {
+        wx.hideLoading()
+        wx.showLoading({
+          title: '提交失败',
+        })
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 500)
+        console.log("自动提交失败")
+        wx.reLaunch({
+          url: '../stuIndex/stuIndex',
+        })
+      }
+    }).catch(err => {
+      console.log(err)
+    })
   }
 })

@@ -14,42 +14,63 @@ Page({
     },
     time: 1,
     sid: 1,
-    exams: []
+    exams: [],
+    isShow:false
   },
   //查看所有测试
-  toExams:function(e){
+  toExams: function (e) {
     console.log(e)
     wx.navigateTo({
       url: '../exams/exams',
     })
   },
   //参加考试
-  joinExam: function(e) {
-    var that = this;
-    var i = e.currentTarget.dataset.index;
-    //将对象转换成json字符串
-    var exam = that.data.exams[i];
-    console.log(exam)
-    wx.showModal({
-      title: '是否立即参加考试？',
-      content: '点击确定立即开始考试！',
-      success(res) {
-        if (res.confirm) {
-          // wx.navigateTo({
-          //   url: '../preExam/preExam?exam=' + JSON.stringify(exam),
-          // })
-          wx.reLaunch({
-            url: '../preExam/preExam?exam=' + JSON.stringify(exam),
-          })
-        } else if (res.cancel) {}
-      }
-    })
-
+  joinExam: function (e) {
+    let that = this;
+    let todo = that.data.userInfo.todo
+    let i = e.currentTarget.dataset.index;
+    let exam = that.data.exams[i];
+    if(exam.isOut){
+      wx.showModal({
+        title: '时间已过',
+        content:'当前时间已超过截止时间，不能进行考试'
+      })
+    }else{
+    if (todo >= 0) {
+      wx.showModal({
+        title: '测试' + that.data.exams[todo].ex_name + '未完成',
+        content: '是否继续考试？',
+        success: function (res) {
+          if (res.cancel) {
+            //点击取消,默认隐藏弹框
+          } else {
+            exam = that.data.exams[todo];
+            console.log(exam)
+            wx.reLaunch({
+              url: '../preExam/preExam?exam=' + JSON.stringify(exam),
+            })
+          }
+        }
+      })
+    } else {
+      console.log(exam)
+      wx.showModal({
+        title: '是否立即参加考试？',
+        content: '点击确定立即开始考试！',
+        success(res) {
+          if (res.confirm) {
+            wx.reLaunch({
+              url: '../preExam/preExam?exam=' + JSON.stringify(exam),
+            })
+          } else if (res.cancel) {}
+        }
+      })
+    }}
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     wx.showLoading({
       title: '加载中',
       mask: true
@@ -60,15 +81,13 @@ Page({
         //发送 res.code 到后台换取 openId, sessionKey, unionId
         // console.log(res.code);
         fuc.request(api.getOpenid, {
-          "code": res.code,
-          "appid": app.globalData.appid,
-          "appsecret": app.globalData.appsecret
+          "code": res.code
         }).then(function (res) {
           if (res.data == wx.getStorageSync("userInfo").s_openid) {
             // console.log('进入true')
-            var userInfoNew = wx.getStorageSync("userInfo");
-            // console.log(userInfoNew)
-            app.globalData.userInfo = userInfoNew;
+            let userInfoNew = wx.getStorageSync("userInfo");
+            console.log(userInfoNew)
+            app.globalData.userInfo = userInfoNew
             that.setData({
               userInfo: userInfoNew
             })
@@ -76,22 +95,45 @@ Page({
             fuc.request(api.getExamInfo, {
               sid: userInfoNew.s_id
             }).then(function (res) {
-              if(res.data.length>=1){
-              var exams = res.data;
-              // 时间格式转换
-              for (var i = 0; i < exams.length; i++) {
-                exams[i].start_time = fuc.rTime(exams[i].start_time)
-                exams[i].end_time = fuc.rTime(exams[i].end_time)
-              }
-              that.setData({
-                exams: exams
-              })
+              if (res.data.length >= 1) {
+                var exams = res.data;
+                // 时间格式转换
+                exams = fuc.formatExams(exams)
+                console.log(exams)
+                that.setData({
+                  exams: exams,
+                  isShow:true
+                })
+                /* 判断有不有已经开始作答的试卷 */
+                userInfoNew.todo = fuc.isFree(exams)
+                console.log(userInfoNew.todo)
+                that.data.userInfo = userInfoNew
+                app.globalData.userInfo = userInfoNew;
                 wx.hideLoading()
+                if (userInfoNew.todo >= 0) {
+                  wx.showModal({
+                    title: '还有考试未完成',
+                    content: '是否继续考试？',
+                    success: function (res) {
+                      if (res.cancel) {
+                        //点击取消,默认隐藏弹框
+                      } else {
+                        var exam = that.data.exams[userInfoNew.todo];
+                        console.log(exam)
+                        wx.reLaunch({
+                          url: '../preExam/preExam?exam=' + JSON.stringify(exam),
+                        })
+                      }
+                    }
+                  })
+                }
               } else {
+                that.setData({
+                  isShow:false
+                })
                 wx.hideLoading()
-               }
+              }
             })
-            
           } else {
             wx.hideLoading()
             console.log(wx.getStorageSync("userInfo"))
@@ -105,16 +147,14 @@ Page({
             })
           }
         })
-
       }
     })
-
   },
-  unLogin: function(e) {
+  unLogin: function (e) {
     wx.showModal({
       title: '退出登录',
       content: '是否退出登录并清空缓存？',
-      success: function(res) {
+      success: function (res) {
         if (res.cancel) {
           //点击取消,默认隐藏弹框
         } else {
@@ -131,54 +171,7 @@ Page({
         }
       }
     })
-    
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
 })

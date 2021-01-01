@@ -1,5 +1,0 @@
-<!--pages/test/test.wxml-->
-<view class="container">
-  <towxml nodes="{{question}}"/>
-</view>
-<button bindtap="switchQ">换题目</button>

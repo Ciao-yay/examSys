@@ -17,14 +17,16 @@
     "pages/test/test",
     "pages/upload/upload",
     "pages/wrongSubs/wrongSubs",
+    "pages/wsDetail/wsDetail",
     "pages/my/my",
     "pages/loginTest/loginTest",
-    "pages/pageDesign/pageDesign"
+    "pages/pageDesign/pageDesign",
+    "pages/err/err"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "线上答题系统",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
@@ -33,15 +35,14 @@
         "pagePath": "pages/stuIndex/stuIndex",
         "text": "首页",
         "iconPath": "images/home0.png",
-        "selectedIconPath": "images/home1.png",
-        "selectedColor": "#1296db"
+        "selectedIconPath": "images/home1.png"
+        
       },
       {
         "pagePath": "pages/upload/upload",
         "text": "上传题目",
         "iconPath": "images/upload0.png",
-        "selectedIconPath": "images/upload1.png",
-        "selectedColor": "#1296db"
+        "selectedIconPath": "images/upload1.png"
       },
       {
         "pagePath": "pages/wrongSubs/wrongSubs",
