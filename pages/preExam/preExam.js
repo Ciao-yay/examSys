@@ -283,6 +283,7 @@ Page({
         // console.log(res)
         if (res.data) {
           subjects = res.data
+          // 解析题目
           fuc.latexToMarkdown(subjects);
           that.data.subjects = subjects
           // console.log(subjects)

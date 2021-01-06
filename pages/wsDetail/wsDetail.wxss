@@ -6,9 +6,9 @@
   align-items: center;
   justify-content: flex-start;
 }
-.page view{
+/* .page view{
   margin: 15rpx 0;
-}
+} */
 
 .head{
   height: 105rpx;
@@ -35,10 +35,6 @@
   height: 100rpx;
   border-radius: 50%;
 }
-.countDown{
-  font:11pt;
-  color:red
-}
 .information{
   background: rgb(80,183,193);
   display: flex;
@@ -53,10 +49,10 @@
 }
 .information view{
   margin: -4rpx 0;
-  font-size:9pt;
+  font-size: 30rpx;
 }
 .information view:first-child{
-  font-size:11pt
+  font-size:40rpx
 }
 .body{
   margin: 20rpx;
@@ -72,7 +68,7 @@
   height: 300rpx;
   padding: 5rpx;
   border-bottom: 1rpx solid black;
-  font-size:9pt;
+  font-size:15rpx;
   line-height: 100rpx;
   text-align: center;
 }
@@ -110,7 +106,7 @@
   color:rgb(195,195,195);
   border-radius: 70rpx;
   border: 1rpx solid rgb(195,195,195);
-  font-size:11pt;
+  font-size:40rpx;
   text-align: center;
   line-height: 70rpx;
   margin: 50rpx 0 0 0;
@@ -121,14 +117,14 @@
   background: rgb(80,183,193);
   color: white;
   border-radius: 70rpx;
-  font-size:11pt;
+  font-size:40rpx;
   text-align: center;
   line-height: 70rpx;
   margin: 50rpx 0 0 0;
 }
 .content{
   width: 85%;
-  font-size:9pt;
+  font-size:30rpx;
 }
 .buttons{
   width: 70%;

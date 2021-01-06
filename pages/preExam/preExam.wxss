@@ -6,9 +6,9 @@
   align-items: center;
   justify-content: flex-start;
 }
-.page view{
+/* .page view{
   margin: 15rpx 0;
-}
+} */
 
 .head{
   height: 105rpx;
@@ -58,6 +58,7 @@
 .information view:first-child{
   font-size:11pt
 }
+/* 题目部分 */
 .body{
   margin: 20rpx;
   width: 95%;

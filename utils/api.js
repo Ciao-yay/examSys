@@ -1,7 +1,7 @@
 // 测试服务器
-const ApiRootUrl = "https://www.nciao.cn/exam/";
+// const ApiRootUrl = "https://www.nciao.cn/exam/";
 // 本地服务器
-// const ApiRootUrl = "http://localhost:8080/exam/";
+const ApiRootUrl = "http://localhost:8080/exam/";
 // 正式服务器
 // const ApiRootUrl = "https://examsys.nciao.cn/examSystem/";
 const Student = "student/"; //学生

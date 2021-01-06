@@ -1,0 +1,57 @@
+<!--
+此文件为开发者工具生成，生成时间: 2021/1/6 下午10:23:41 
+使用方法：
+在 C:\Users\Public\code\project\weixin_miniPro\examSysLocalTest\pages\stuIndex\stuIndex.wxml 引入模板
+
+```
+<import src="stuIndex.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 C:\Users\Public\code\project\weixin_miniPro\examSysLocalTest\pages\stuIndex\stuIndex.wxss 中引入样式
+```
+@import "./stuIndex.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<template name="skeleton">
+  <view class="sk-container">
+    <view class="body">
+      <view class="head" style="border: none;">
+        <view class="logo">
+          <image class="sk-image"></image>
+        </view>
+        <view class="headTittle sk-transparent sk-text-27-7778-951 sk-text" style="background-position-x: 50%;">
+          大学数学单元练习系统
+        </view>
+      </view>
+      <view class="user">
+        <view class="userInfo">
+          <view class="name sk-transparent sk-text-14-2857-540 sk-text">香锅</view>
+          <view class="userID sk-transparent sk-text-14-2857-953 sk-text">17320220304</view>
+        </view>
+        <view class="other">
+          <view class="unLogin sk-transparent sk-text-14-2857-708 sk-text" style="background-position-x: 50%;">退出登录</view>
+          <view class="toExams sk-transparent sk-text-14-2857-12 sk-text" style="background-position-x: 50%;">所有测试</view>
+        </view>
+      </view>
+      <view class="tittle" style="border: none;">
+        <view class="tittle sk-transparent sk-text-27-7778-884 sk-text" style="border: none;">待完成</view>
+      </view>
+      <view>
+        <view is="miniprogram_npm/@vant/weapp/empty/index">
+          <view class=" van-empty index--van-empty">
+            <view class="van-empty__image index--van-empty__image">
+              <image class="van-empty__image__img index--van-empty__image__img sk-image"></image>
+            </view>
+            <view class="van-empty__description index--van-empty__description sk-transparent sk-text-15-0000-105 sk-text">
+              暂时没有考试
+            </view>
+            <view class="van-empty__bottom index--van-empty__bottom"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

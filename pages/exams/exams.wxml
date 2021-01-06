@@ -2,7 +2,7 @@
 <view wx:if="{{!isShow}}">
   <van-empty description="暂时还没有内容哦" />
 </view>
-<view class="exams" wx:if="{{isShow}}">
+<view class="exams" wx:else>
   <view class="examsItem" wx:for="{{exams}}" bindtap="clickExam" data-id="{{item.ex_id}}" data-index="{{index}}">
     <!--颜色块-->
     <view class="itemLeft">
