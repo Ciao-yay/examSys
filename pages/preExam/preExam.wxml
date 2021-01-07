@@ -1,44 +1,32 @@
-<!--pages/preExam/preExam.wxml-->
+<!-- pages/preExam/preExam.wxml -->
 <view class="head">
   <view class="logo">
     <image src="../../images/logo.png"></image>
   </view>
-  <view class="headTittle">
-    大学数学单元练习系统
-  </view>
+  <view class="headTittle">大学数学单元练习系统</view>
 </view>
 <view class="page">
-
-  <!--倒计时-->
+  <!-- 倒计时 -->
   <!-- <view class="countDown">{{countDown}}</view> -->
-  <!--题目信息-->
+  <!-- 题目信息 -->
   <view class="information">
+  <!-- 倒计时 -->
     <view class="countDown">
-      {{day==0?"":day+"天"}} <text>{{hou==0?"":hou}}</text>{{hou==0?"":"："}}<text>{{min}}</text>：<text>{{sec}}</text>
+      {{day==0?"":day+"天"}}
+      <text>{{hou==0?"":hou}}</text>
+      {{hou==0?"":"："}}
+      <text>{{min}}</text>
+      ：
+      <text>{{sec}}</text>
     </view>
     <view class="knowledge">{{subject.kn_name}}</view>
     <view class="level">难度 ： {{subject.level}}</view>
     <view class="hasDone">已做 ： {{hasDone}}</view>
   </view>
-  <!--题目主体-->
-  <view class="body">
-    <view class="question">
-      <towxml nodes="{{subject.question}}" />
-    </view>
-    <view class="options">
-      <view class="optionsItem" wx:for="{{subject.options}}" bindtap="selectFuc" data-id="{{index}}" wx:key="id">
-        <view class='{{abcd[item.id].isSelected ? "ABCDSelected":"ABCDDefault"}}'>{{abcd[item.id].name}}</view>
-        <view class="content">
-          <towxml nodes="{{item.content}}" />
-        </view>
-      </view>
-    </view>
-  </view>
-  <!--确认答案-->
+  <!-- 题目主体 -->
+  <SubjectShow subject='{{subject}}' bind:getchooseanwser="getChooseAnwser" />
+  <!-- 确认答案 -->
   <view class="buttons">
-    <view class="nextPro" bindtap="nextSubject">
-      下一题
-    </view>
+    <view class="nextPro" bindtap="nextSubject">下一题</view>
   </view>
-
 </view>

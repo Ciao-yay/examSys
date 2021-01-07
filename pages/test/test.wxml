@@ -1,19 +1,5 @@
 <!-- 题目主体 -->
-<view class="body">
-  <view class="question">
-    <towxml nodes="{{subject.question}}" />
-  </view>
-  <view class="options">
-    <view class="optionsItem" wx:for="{{subject.options}}" bindtap="selectFuc" data-id="{{index}}" wx:key="id">
-      <view class='{{abcd[item.id].isSelected ? "ABCDSelected":"ABCDDefault"}}'>
-        {{abcd[item.id].name}}
-      </view>
-      <view class="content">
-        <towxml nodes="{{item.content}}" />
-      </view>
-    </view>
-  </view>
-</view>
+<SubjectShow subject='{{subject}}' bind:getchooseanwser="getChooseAnwser"/>
 <!-- 确认答案 -->
 <view class="buttons">
   <view class="nextPro" bindtap="nextSubject">下一题</view>

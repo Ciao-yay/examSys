@@ -11,23 +11,9 @@
 
   <!--题目信息-->
   <view class="information">
-    <view class="knowledge">{{subject.kn_name}}</view>
-    <view class="level">错选过 ：<text wx:for="{{answer}}">{{item}} </text> </view>
+    <view class="level">错选过 ：<text wx:for="{{answer}}" wx:key="index">{{item}} </text> </view>
     <view class="hasDone">答案 ： {{sub.answer}}</view>
   </view>
   <!--题目主体-->
-  <view class="body">
-    <view class="question">
-      <towxml nodes="{{sub.question}}" />
-    </view>
-    <view class="options">
-      <view class="optionsItem" wx:for="{{sub.options}}" data-id="{{index}}">
-        <view class='{{abcd[item.id].isSelected ? "ABCDSelected":"ABCDDefault"}}'>{{abcd[item.id].name}}</view>
-        <view class="content">
-          <towxml nodes="{{item.content}}" />
-        </view>
-      </view>
-    </view>
-  </view>
-
+  <SubjectShow subject='{{sub}}'/>
 </view>

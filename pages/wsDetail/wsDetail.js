@@ -11,8 +11,6 @@ Page({
     sid:1,
     sub:{},
     answer:[],
-    abcd: app.globalData.abcd,
-    isLoading:true
   },
 
   /**
@@ -25,9 +23,8 @@ Page({
       sid:app.globalData.userInfo.s_id,
       prbmid:prbm_id
     }).then(res => {
-      // console.log(res)
       let sub = res.data.sub[0]
-      // console.log(sub)
+      console.log(res.data)
       sub.question = app.towxml(sub.question, 'markdown')
       sub.optionA = app.towxml(sub.optionA, 'markdown')
       sub.optionB = app.towxml(sub.optionB, 'markdown')
@@ -36,16 +33,12 @@ Page({
       sub = fuc.addOptions(sub)
       console.log(res.data.answer)
       let answer = res.data.answer.map(item => item.answer).filter((item,i,self) => self.indexOf(item) === i)
-      console.log(answer[0]==answer[1])
       that.setData({
         sub,
-        answer,
-        isLoading:false
+        answer      
       })
     }).catch(err => {
       console.log(err)
     })
-
   }
-
 })

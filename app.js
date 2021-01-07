@@ -95,23 +95,6 @@ App({
   globalData: {
     userInfo: null,
     sid: 1,
-    abcd: [{
-      id: 0,
-      name: "A",
-      isSelected: false,
-    }, {
-      id: 1,
-      name: "B",
-      isSelected: false,
-    }, {
-      id: 2,
-      name: "C",
-      isSelected: false,
-    }, {
-      id: 3,
-      name: "D",
-      isSelected: false,
-    }],
     ex_ids: []
   }
 })

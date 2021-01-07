@@ -12,52 +12,32 @@ Page({
     hasDone: 0,
     subject: {},
     subjects: [],
-    abcd: app.globalData.abcd,
-    yourAnswer: '',
     isRight: true,
     subResult: [{
       "rightTotal": 0,
       "wrongTotal": 0,
       "level": 1
     }],
-    isLoading: true, // 判断是否尚在加载中
-    countDown: false
+    countDown: false,
+    yourAnswer:''
   },
-  //单选，选中的选项变色，其他选项恢复正常
-  selectFuc: function (e) {
-    // console.log(arguments)
-    var id = e.currentTarget.dataset.id;
-    var abcd = this.data.abcd;
-    abcd = fuc.changeOption(abcd, id);
-    this.setData({
-      abcd: abcd,
-      yourAnswer: abcd[id].name
-    });
-  },
-  /**
-   * 按等级获取题目
-   * @param {*} e 
-   */
 
   /**
    * 提交并开始下一题（测试用）
    */
-  nextSubject(e) {
+  async nextSubject(e) {
     let that = this
     let {
       subject,
-      yourAnswer,
       exam,
-      abcd,
       subjects,
-      subResult
+      subResult,
+      yourAnswer
     } = that.data
     let isRight = fuc.isRight(yourAnswer, subject.answer)
     let isRightNum = fuc.isRightToNum(isRight)
     let replyRecord = {}
-    // console.log(that.data.userInfo)
     let sid = app.globalData.userInfo.s_id;
-    // console.log(subject,yourAnswer,exam,abcd)
     wx.showModal({
       title: '提交题目',
       content: '是否提交本题答案并开始下一题？',
@@ -66,7 +46,7 @@ Page({
           wx.showLoading({
             title: '提交中',
           })
-          if (yourAnswer != '') {
+          if (yourAnswer!='') {
             //添加答题记录
             replyRecord = fuc.addRecord(yourAnswer, isRightNum, subject.prbm_id, exam.ex_id, sid, exam.tst_id)
             let hasDoneL = 0 //同等级难度一共做的题目量
@@ -99,6 +79,7 @@ Page({
                 })
                 //获取题目难度
                 let newLevel = fuc.getLevel(isRight, exam.min_level, exam.max_level, subject.level);
+                console.log(newLevel)
                 if ((isRight && newLevel == 0) || hasDoneL >= 5) {
                   /**
                    * 1、提交试卷
@@ -126,21 +107,15 @@ Page({
                       let subjectsL = subjects.filter(item => item.level === newLevel)
                       /* 初始题目 */
                       let i = fuc.randomNum(subjectsL.length);
-                      // console.log(i,subjectsL,subjectsL[i])
                       that.setData({
                         subject: {}
                       })
                       subject = fuc.addOptions(subjectsL[i])
-                      // console.log(subject)
-                      //清除选项颜色
-                      fuc.removeOptionColor(abcd);
-                      that.data.yourAnswer = ''
+                      that.data.yourAnswer=''
                       that.data.isRight = false,
                         that.setData({
                           subject,
-                          hasDone: that.data.hasDone + 1,
-                          abcd: abcd,
-                          isLoading: false
+                          hasDone: that.data.hasDone + 1
                         });
                       wx.hideLoading()
                     }
@@ -236,7 +211,6 @@ Page({
           fuc.request(api.hasRecord, {
             tstid: exam.tst_id
           }).then(res => {
-            // console.log(res)
             if (res.data != -1) {
               console.log(res)
               that.setData({
@@ -280,17 +254,14 @@ Page({
       }, err => {
         console.log(err)
       }).then(res => {
-        // console.log(res)
         if (res.data) {
           subjects = res.data
           // 解析题目
           fuc.latexToMarkdown(subjects);
           that.data.subjects = subjects
-          // console.log(subjects)
           subjectsL = subjects.filter(item => item.level === newLevel)
           /* 初始题目 */
           let i = fuc.randomNum(subjectsL.length);
-          // console.log(i,subjectsL,subjectsL[i])
           let subject = fuc.addOptions(subjectsL[i])
           console.log(subject)
           that.setData({
@@ -302,6 +273,12 @@ Page({
         console.log(err)
       })
     }
+  },
+
+  // 监听子组件，获取选择的答案
+  getChooseAnwser(e) {
+    this.data.yourAnswer = e ? e.detail.yourAnwser : ''
+    console.log(this.data.yourAnswer)
   },
   // 倒计时
   countDown: function () {

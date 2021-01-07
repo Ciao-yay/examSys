@@ -1,6 +1,5 @@
 var fuc = require("../../utils/fuc.js");
 var api = require("../../utils/api.js");
-const app = getApp();
 
 Page({
   /**
@@ -9,8 +8,7 @@ Page({
   data: {
     subjects: [],
     subject: {},
-    isLoading: true, // 判断是否尚在加载中
-    abcd: app.globalData.abcd,
+    i:0
   },
 
   /**
@@ -25,13 +23,11 @@ Page({
       console.log(`出错了`, e)
     }
     subjects = await this.formatSubjects(subjects)
-    this.subjects = subjects
-    let subject = await fuc.addOptions(subjects[2])
+    this.data.subjects = subjects
+    let subject = await fuc.addOptions(subjects[0])
     await this.setData({
       subject,
-      isLoading: false
     })
-    console.log(subject)
   },
   // 获取题目
   async getSubjects() {
@@ -42,7 +38,6 @@ Page({
     } catch (e) {
       console.log(`出错了`, e)
     }
-    // console.log(result)
     if(result.data.code){
       subjects = result.data.data
       return subjects
@@ -54,5 +49,23 @@ Page({
     let newSubjects
     newSubjects = fuc.latexToMarkdown(subjects);
     return newSubjects
+  },
+  // 切换题目
+  nextSubject(){
+    const subjects = this.data.subjects
+    let i = this.data.i===12?0:(this.data.i+1)
+    const subject = fuc.addOptions(subjects[i])
+    this.data.i = i
+    this.setData({
+      subject:{},
+    })
+    this.setData({
+      subject,
+    })
+    // console.log(this.getChooseAnwser())
+  },
+  // 监听子组件，获取选择的答案
+  getChooseAnwser(e){
+    return e?e.detail.yourAnwser:0
   }
 })
