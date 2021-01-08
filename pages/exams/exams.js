@@ -10,7 +10,8 @@ Page({
   data: {
     userInfo: {},
     exams: [],
-    isShow: false
+    isShow: false,
+    show: false,
   },
   /**
    *  点击判断status
@@ -69,6 +70,17 @@ Page({
         break
     }
     // console.log(exam)
+  },
+
+  /**
+   *  弹出层控制
+   */  
+  showPopup() {
+    this.setData({ show: true });
+  },
+
+  onClose() {
+    this.setData({ show: false });
   },
   /**
    * 生命周期函数--监听页面加载

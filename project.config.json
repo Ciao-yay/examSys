@@ -102,8 +102,7 @@
                     "scene": null
                 },
                 {
-                    "id": 7,
-                    "name": "Latex数学公式解析测试",
+                    "name": "看看样式",
                     "pathName": "pages/test/test",
                     "query": "",
                     "scene": null

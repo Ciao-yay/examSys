@@ -1,2 +1,23 @@
-<!--components/examList/examList.wxml-->
-<text>components/examList/examList.wxml</text>
+<view class="exams">
+  <view class="examItem" wx:for="{{[0,1,2]}}" wx:key="item">
+    <!-- 头部信息 -->
+    <view class="header">
+      <view class="course">大学数学</view>
+      <view class="isClosed">进行中</view>
+    </view>
+    <!-- 描述信息 -->
+    <view class="main">
+      <view class="charpter">
+        <view class="mainCharpter">第一章测试</view>
+        <view class="subCharpter">考察知识点</view>
+      </view>
+      <view class="status">已完成</view>
+    </view>
+    <!-- 落款 -->
+    <view class="footer">
+      <!-- 发布者 -->
+      <view class="publicer">张老师</view>
+      <view class="time">2021.01.02 14:22</view>
+    </view>
+  </view>
+</view>

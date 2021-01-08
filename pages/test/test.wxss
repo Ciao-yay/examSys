@@ -1,17 +1,52 @@
-.buttons{
-  width: 70%;
+.exams{
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  /* justify-content: center; */
   align-items: center;
 }
-.buttons view{
-  width: 40%;
-  height: 80rpx;
-  background: rgb(80,183,193);
-  color: white;
-  font-size:40rpx;
-  line-height: 80rpx;
-  text-align: center;
+.examItem{
+  width: 90%;
+  height: 150rpx;
+  padding: 20rpx;
+  margin: 10rpx 0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);  
   border-radius: 10rpx;
+  box-sizing: content-box;
+  font-size: 30rpx;
+
+  /* text-align: center; */
+}
+/* 头部信息 */
+.header,.main,.footer{
+  /* margin-top: 5rpx; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.course{
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.isClosed{
+  /* font-size: 30rpx; */
+  color: #12cb77;
+}
+/* 描述信息 */
+.main{
+  color: #888;
+  font-size: 28rpx;
+}
+.subCharpter{
+  font-size: 26rpx;
+}
+/* 落款 */
+.footer{
+  margin-top: 10rpx;
+  color: #999;
+  font-size: 25rpx;
+}
+.publicer{
+  color: #ff813d;
 }
