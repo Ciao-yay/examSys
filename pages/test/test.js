@@ -18,7 +18,6 @@ Page({
     this.setData({
       exams
     })
-    console.log(exams)
   },
 
 })
