@@ -64,6 +64,7 @@ Page({
         break
         /* 已完成，查看详细情况 */
       case 2:
+        console.log(exam)
         wx.navigateTo({
           url: '../examDes/examDes?exam=' + JSON.stringify(exam),
         })
@@ -73,23 +74,13 @@ Page({
   },
 
   /**
-   *  弹出层控制
-   */  
-  showPopup() {
-    this.setData({ show: true });
-  },
-
-  onClose() {
-    this.setData({ show: false });
-  },
-  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let that = this
-    let sid = app.globalData.userInfo.s_id
-    // let sid = 10
-    that.data.userInfo = app.globalData.userInfo
+    // let sid = app.globalData.userInfo.s_id
+    // that.data.userInfo = app.globalData.userInfo
+    let sid = 4
     // that.data.userInfo = wx.getStorageSync('userInfo')
     fuc.request(api.getExamAllBySid, {
       sid
@@ -98,6 +89,7 @@ Page({
         var exams = res.data;
         // 时间格式转换
         exams = fuc.formatExams(exams)
+        console.log(exams)
         that.setData({
           exams: res.data,
           isShow: true
@@ -110,6 +102,7 @@ Page({
     })
   },
   /* 自定义函数 */
+  /* 加入考试 */
   joinExam(exam) {
     let title = "是否立即参加考试？"
     let content = "点击确定立即开始考试！"

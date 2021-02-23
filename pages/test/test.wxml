@@ -1,14 +1,14 @@
 <view class="exams">
-  <view class="examItem" wx:for="{{exams}}" wx:key="item.ex_id">
+  <view class="examItem" wx:for="{{exams}}" wx:key="ex_id">
     <!-- 头部信息 -->
     <view class="header">
       <view class="course">{{item.crs_name}}</view>
-      <view class="isClosed">{{}}</view>
+      <view class="score">{{item.score}}</view>
     </view>
     <!-- 描述信息 -->
     <view class="main">
       <view class="charpter">
-        <view class="mainCharpter">{{item.ex_name}}</view>
+        <view class="mainCharpter">{{item.mome}}</view>
         <view class="subCharpter">考察知识点</view>
       </view>
       <view class="status">已完成</view>

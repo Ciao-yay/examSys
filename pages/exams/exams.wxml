@@ -1,28 +1,56 @@
-<!--pages/exam/exam.wxml-->
+<!-- pages/exam/exam.wxml -->
 <view wx:if="{{!isShow}}">
   <van-empty description="暂时还没有内容哦" />
 </view>
 <view class="exams" wx:else>
-  <view bindtap="showPopup" class="examsItem" wx:for="{{exams}}"  data-id="{{item.ex_id}}" data-index="{{index}}">
-    <!--颜色块-->
-    <view class="itemLeft">
-    </view>
-    <!--中间内容：课程名称，发布及截止时间-->
-    <view class="itemMiddle">
-      <view class="middleDes">
-        <view class="courseName">{{item.crs_name}}</view>
-        <view class="sTime">{{item.end_time1}}</view>
-        <view class="eTime">{{item.isOut?"已结束":"进行中"}}</view>
+  <van-tabs active="all" class="nav" color="rgb(0,154,214)" sticky animated swipeable>
+      <van-tab title="全部" name="all">
+      <!-- 测试列表 -->
+      <ExamList exams="{{exams}}"></ExamList>
+    </van-tab>
+    <van-tab title="未完成" name="todo">
+      <!-- 测试列表 -->
+      <view class="examsItem" bindtap="clickExam" wx:for="{{exams}}" data-id="{{item.ex_id}}" wx:key="index" data-index="{{index}}">
+        <!-- 颜色块 -->
+        <view class="itemLeft"></view>
+        <!-- 中间内容：课程名称，发布及截止时间 -->
+        <view class="itemMiddle">
+          <view class="middleDes">
+            <view class="courseName">{{item.crs_name}}</view>
+            <view class="sTime">{{item.end_time1}}</view>
+            <view class="eTime">{{item.isOut?"已结束":"进行中"}}</view>
+          </view>
+        </view>
+        <!-- 测试名，剩余时间 -->
+        <view class="itemRight">
+          <view class="examName">{{item.ex_name}}</view>
+          <view class="time">
+            <p>{{item.score>=0&&item.score!=null? item.score:"待完成"}}</p>
+          </view>
+        </view>
       </view>
-    </view>
-    <!--测试名，剩余时间-->
-    <view class="itemRight">
-      <view class="examName">{{item.ex_name}}</view>
-      <view class="time">
-        <p>{{item.score>=0&&item.score!=null? item.score:"待完成"}}</p>
+    </van-tab>
+    <van-tab title="已完成" name="done">
+      <!-- 测试列表 -->
+      <view class="examsItem" bindtap="clickExam" wx:for="{{exams}}" data-id="{{item.ex_id}}" wx:key="index" data-index="{{index}}">
+        <!-- 颜色块 -->
+        <view class="itemLeft"></view>
+        <!-- 中间内容：课程名称，发布及截止时间 -->
+        <view class="itemMiddle">
+          <view class="middleDes">
+            <view class="courseName">{{item.crs_name}}</view>
+            <view class="sTime">{{item.end_time1}}</view>
+            <view class="eTime">{{item.isOut?"已结束":"进行中"}}</view>
+          </view>
+        </view>
+        <!-- 测试名，剩余时间 -->
+        <view class="itemRight">
+          <view class="examName">{{item.ex_name}}</view>
+          <view class="time">
+            <p>{{item.score>=0&&item.score!=null? item.score:"待完成"}}</p>
+          </view>
+        </view>
       </view>
-    </view>
-    <!-- 弹出层，测试基本信息 -->
-    <van-popup show="{{ show }}" bindtap="onClose">内容</van-popup>
-  </view>
+    </van-tab>
+  </van-tabs>
 </view>

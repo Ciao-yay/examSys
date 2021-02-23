@@ -2,6 +2,7 @@
 // const ApiRootUrl = "https://www.nciao.cn/exam/";
 // 本地服务器
 const ApiRootUrl = "http://localhost:8080/exam/";
+const ApiRootUrlV1 = "http://localhost:8080/v1/exam/";
 // 正式服务器
 // const ApiRootUrl = "https://examsys.nciao.cn/examSystem/";
 const Student = "student/"; //学生
@@ -10,6 +11,10 @@ const Test = "test/"; //登录
 const Tests = "tests/"; //功能测试
 
 module.exports = {
+  /* 新接口 */
+  /* 考试 */
+  getExamList: `${ApiRootUrlV1}/examList`,// 获取测试列表
+  /* 用户 */
   /* 功能测试 */
   tGetWrongSubs: ApiRootUrl + Tests + "tGetWrongSubs", //查询错题
   tGetSubjects: ApiRootUrl + Tests + "tGetSubjects", //快速登陆

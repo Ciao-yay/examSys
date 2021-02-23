@@ -28,10 +28,11 @@
 .course{
   font-size: 32rpx;
   font-weight: 600;
+  color: rgb(0,154,214);
 }
-.isClosed{
+.score{
   /* font-size: 30rpx; */
-  color: #12cb77;
+  color: red;
 }
 /* 描述信息 */
 .main{

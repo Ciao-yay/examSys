@@ -14,7 +14,8 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "@vant/weapp": "^1.5.2"
+    "@vant/weapp": "^1.5.2",
+    "moment": "^2.29.1"
   },
   "devDependencies": {}
 }

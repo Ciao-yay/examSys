@@ -37,39 +37,38 @@ function getLevel(isRight, minLevel, maxLevel, currentLevel) {
  * 分数：每个难度占的分值的和/难度和
  * 
  */
-function getScore(subResult,maxLevel) {
+function getScore(subResult, maxLevel) {
   // console.log(maxLevel)
   let score = 0
   let levelTotal = 0
   let base = 4
   let baseScore = 40
-  levelTotal = ((base+1)+maxLevel+base)*maxLevel/2
+  levelTotal = ((base + 1) + maxLevel + base) * maxLevel / 2
   for (var i = 0; i < subResult.length; i++) {
     let rightTotal = subResult[i].rightTotal
     let wrongTotal = subResult[i].wrongTotal
     let total = rightTotal + wrongTotal
-    let level = subResult[i].level+base
+    let level = subResult[i].level + base
     if (total != 0) {
-      score += (100-baseScore) * level * rightTotal / total
+      score += (100 - baseScore) * level * rightTotal / total
     }
     console.log(score)
   }
-  let tempScore = Math.round(score / levelTotal+baseScore)
-  console.log(score,levelTotal,tempScore)
-  return score===0?0:tempScore
+  let tempScore = Math.round(score / levelTotal + baseScore)
+  console.log(score, levelTotal, tempScore)
+  return score === 0 ? 0 : tempScore
 }
 
 /**
  * 封封微信的的request
  */
-function request(url, data = {}) {
-  return new Promise(function(resolve, reject) {
+function request(url, data = {}, method = 'GET',header ={"Content-Type":"application/json"}) {
+  return new Promise(function (resolve, reject) {
     wx.request({
-      url: url,
-      data: data,
-      header: {
-        "Content-Type": "application/json"
-      }, // 设置请求的 header
+      url,
+      data,
+      header,
+      method,
       success: res => resolve(res),
       fail: err => reject(err)
     });
@@ -113,7 +112,7 @@ function addOptions(subject) {
 //   }
 // }
 function randomNum(maxNum) {
-  return parseInt(Math.random() * maxNum + 1, 10)-1;
+  return parseInt(Math.random() * maxNum + 1, 10) - 1;
 }
 //时间戳转换为时间
 function formatTime(number, format) {
@@ -166,7 +165,7 @@ function isRight(yourAnswer, rightAnswer) {
 }
 
 function isRightToNum(isRight) {
-  return isRight?1:0
+  return isRight ? 1 : 0
 }
 
 function numToIsRight(num) {
@@ -174,9 +173,9 @@ function numToIsRight(num) {
 }
 
 // 判断是否能开始新的考试
-function isFree(exams){
-  for(var i=0,len=exams.length;i<len;i++){
-    if(exams[i].status == 1 && !exams[i].isOut){
+function isFree(exams) {
+  for (var i = 0, len = exams.length; i < len; i++) {
+    if (exams[i].status == 1 && !exams[i].isOut) {
       return i;
     }
     return -1;
@@ -184,7 +183,7 @@ function isFree(exams){
 }
 
 //添加答题记录(要改一下的)
-function addRecord( answer, result, prbm_id, ex_id, s_id,tst_id) {
+function addRecord(answer, result, prbm_id, ex_id, s_id, tst_id) {
   var obj = {}
   obj.answer = answer;
   obj.result = result;
@@ -275,18 +274,18 @@ function latexToMarkdown(subjects) {
 //     return false;
 //   }
 // }
-function formatExams(exams){
+function formatExams(exams) {
   let ptime = ''
   let etime = ''
   let now = ''
   for (var i = 0; i < exams.length; i++) {
     ptime = new Date(exams[i].public_time)
     etime = new Date(exams[i].end_time)
-    exams[i].public_time1 = `${ptime.getFullYear()}-${ptime.getMonth()+1}-${ptime.getDate()} ${ptime.toLocaleTimeString('chinese', { hour12: false })}`.substr(0,19)
-    exams[i].end_time1 = `${etime.getFullYear()}-${etime.getMonth()+1}-${etime.getDate()} ${etime.toLocaleTimeString('chinese', { hour12: false })}`.substr(0,19)
+    exams[i].public_time1 = `${ptime.getFullYear()}-${ptime.getMonth() + 1}-${ptime.getDate()} ${ptime.toLocaleTimeString('chinese', { hour12: false })}`.substr(0, 19)
+    exams[i].end_time1 = `${etime.getFullYear()}-${etime.getMonth() + 1}-${etime.getDate()} ${etime.toLocaleTimeString('chinese', { hour12: false })}`.substr(0, 19)
     exams[i].isOut = false
     now = new Date()
-    if(now>etime){
+    if (now > etime) {
       exams[i].isOut = true
     }
   }
