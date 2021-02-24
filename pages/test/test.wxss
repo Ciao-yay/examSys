@@ -7,7 +7,7 @@
 }
 .examItem{
   width: 90%;
-  height: 150rpx;
+  /* height: 150rpx;r */
   padding: 20rpx;
   margin: 10rpx 0;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);  
@@ -41,13 +41,11 @@
 }
 .subCharpter{
   font-size: 26rpx;
+  color:#26baff;
 }
 /* 落款 */
 .footer{
   margin-top: 10rpx;
-  color: #999;
-  font-size: 25rpx;
-}
-.publicer{
   color: #ff813d;
+  font-size: 25rpx;
 }
