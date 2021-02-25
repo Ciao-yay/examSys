@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "towxml": "/towxml/towxml",
+    "van-rate": "@vant/weapp/rate/index"
+  }
 }

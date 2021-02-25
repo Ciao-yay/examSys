@@ -1,4 +1,24 @@
 /* components/examList/examList.wxss */
+/* 弹出层 */
+.examDescribe{
+  width: 600rpx;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10rpx;
+  justify-content: flex-start;
+  padding: 20rpx;
+}
+.examDescribe>view{
+  font-size: 25rpx;
+  margin: 10rpx 0;
+}
+.crsName{
+  font-size: 40rpx;
+  font-weight: 600;
+  margin-bottom: 10rpx;
+  color: rgb(0,154,214);
+  text-align: center;
+}
 .exams{
   width: 100%;
   display: flex;

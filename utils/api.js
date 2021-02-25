@@ -14,6 +14,7 @@ module.exports = {
   /* 新接口 */
   /* 考试 */
   getExamList: `${ApiRootUrlV1}/examList`,// 获取测试列表
+  getReplyDetail:`${ApiRootUrlV1}/replyDetail`,// 获取测试列表
   /* 用户 */
   /* 功能测试 */
   tGetWrongSubs: ApiRootUrl + Tests + "tGetWrongSubs", //查询错题

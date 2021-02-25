@@ -1,2 +1,13 @@
-<!--pages/examDes/examDes.wxml-->
-
+<!-- pages/examDes/examDes.wxml -->
+<!-- 题目列表 -->
+<view class="subItem" wx:for="{{replyDetail}}" wx:key='re_id' bindtap="toDetail" data-id='{{item.prbm_id}}'>
+  <view class="subQ">
+    <towxml nodes="{{item.question}}" />
+  </view>
+  <view class="itemBottom">
+    <view class="{{item.result?'right':'wrong'}}">{{item.result?"√":"×"}}</view>
+    <view class="level">
+      <van-rate readonly value="{{ item.level }}" count="{{ 6 }}" size="{{ 15 }}" gutter="{{2}}" />
+    </view>
+  </view>
+</view>
