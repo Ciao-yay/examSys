@@ -143,6 +143,12 @@
                     "pathName": "pages/exams/exams",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "课程详情",
+                    "pathName": "pages/courseDes/courseDes",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

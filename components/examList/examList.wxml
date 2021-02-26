@@ -11,7 +11,7 @@
     <!-- 截止时间 -->
     <view>截止时间：{{exam.end_time}}</view>
     <!-- 成绩 -->
-    <view>得分：{{exam.score}}</view>
+    <view wx:if="{{exam.score}}">得分：{{exam.score}}</view>
     <!-- 按钮：查看详情、进入考试 -->
     <button disabled="{{!exam.score&&exam.isOut}}" bind:tap="chooseWay">{{exam.score?"答题详情":"参与考试"}}</button>
   </view>
@@ -21,7 +21,7 @@
     <!-- 头部信息 -->
     <view class="header">
       <view class="course">{{item.crs_name}}</view>
-      <view class="score">{{item.score}}</view>
+      <view class="score">{{item.score?item.score:""}}</view>
     </view>
     <!-- 描述信息 -->
     <view class="main">

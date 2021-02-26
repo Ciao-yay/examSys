@@ -49,12 +49,6 @@
         "text": "错题集",
         "iconPath": "images/wrong0.png",
         "selectedIconPath": "images/wrong1.png"
-      },
-      {
-        "pagePath": "pages/my/my",
-        "text": "个人中心",
-        "iconPath": "images/my0.png",
-        "selectedIconPath": "images/my1.png"
       }
     ]
   },

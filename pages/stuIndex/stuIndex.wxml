@@ -1,16 +1,14 @@
-<!--pages/stuIndex/stuIndex.wxml-->
+<!-- pages/stuIndex/stuIndex.wxml -->
 <view class="body">
   <!-- <view class="line"></view> -->
   <view class="head">
     <view class="logo">
       <image src="../../images/logo.png"></image>
     </view>
-    <view class="headTittle">
-      大学数学单元练习系统
-    </view>
+    <view class="headTittle">大学数学单元练习系统</view>
   </view>
   <!-- <view class="line"></view> -->
-  <!--用户信息-->
+  <!-- 用户信息 -->
   <view class="user">
     <view class="userInfo">
       <view class="name">{{userInfo.s_name}}</view>
@@ -24,38 +22,16 @@
       <view class="toExams" bindtap="toExams">所有测试</view>
     </view>
   </view>
-  <!--标题-->
+  <!-- 标题 -->
   <view class="tittle">
     <view class="tittle">待完成</view>
   </view>
-  <!--考试列表-->
-  <!--未完成-->
+  <!-- 考试列表 -->
+  <!-- 未完成 -->
   <view wx:if="{{!isShow}}">
     <van-empty description="暂时没有考试" />
   </view>
   <view class="todo" wx:if="{{isShow}}">
-    <view class="exams">
-      <view class="examsItem" wx:for="{{exams}}" bindtap="joinExam" data-id="{{item.ex_id}}" data-index="{{index}}" wx:key="re_id">
-        <!--颜色块-->
-        <view class="itemLeft">
-        </view>
-        <!--中间内容：课程名称，发布及截止时间-->
-        <view class="itemMiddle">
-          <view class="middleDes">
-            <view class="courseName">{{item.crs_name}}</view>
-            <view class="sTime" >{{item.end_time1}}</view>
-            <view class="eTime">{{item.isOut?"已结束":"进行中"}}</view>
-          </view>
-        </view>
-        <!--测试名，剩余时间-->
-        <view class="itemRight">
-          <view class="examName">{{item.ex_name}}</view>
-          <view class="time">
-            <p>{{item.t_name}}</p>
-          </view>
-        </view>
-      </view>
-    </view>
+    <ExamList exams="{{exams}}" userInfo="{{userInfo}}"/>
   </view>
-
 </view>

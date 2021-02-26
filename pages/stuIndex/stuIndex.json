@@ -1,3 +1,6 @@
 {
-  "usingComponents": {"van-empty": "@vant/weapp/empty/index"}
+  "usingComponents": {
+    "van-empty": "@vant/weapp/empty/index",
+    "ExamList": "/components/ExamList/ExamList"
+  }
 }

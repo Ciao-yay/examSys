@@ -1,65 +1,6 @@
 const app = getApp();
 // 封装一些函数
 /**
- * 难度判定算法（测试版本）
- * 参数
- * isRight 是否回答正确,
- * minLevel 最小难度,
- * maxLevel 最大难度,
- * currentLevel 当前难度
- * 判定：
- * -答对了
- * --难度在最小难度到最大难度之间 不包括最大难度，返回难度加1
- * --难度等于最大难度，则认为都已掌握，结束答题
- * -答错了
- * --难度在最小难度到最大难度之间 包括最大难度，不包括最小难度，返回难度-1
- * --难度等于最小难度，返回难度不变
- */
-function getLevel(isRight, minLevel, maxLevel, currentLevel) {
-  if (isRight) {
-    if (currentLevel >= minLevel && currentLevel < maxLevel) {
-      return currentLevel + 1
-    } else {
-      return 0
-    }
-  } else {
-    if (currentLevel > minLevel && currentLevel <= maxLevel) {
-      return currentLevel - 1
-    } else {
-      return currentLevel
-    }
-  }
-}
-
-/**
- * 成绩判定算法（测试版本）
- * 每个难度占的分值：题目难度*当前难度答对的题/当前难度总共答的题
- * 分数：每个难度占的分值的和/难度和
- * 
- */
-function getScore(subResult, maxLevel) {
-  // console.log(maxLevel)
-  let score = 0
-  let levelTotal = 0
-  let base = 4
-  let baseScore = 40
-  levelTotal = ((base + 1) + maxLevel + base) * maxLevel / 2
-  for (var i = 0; i < subResult.length; i++) {
-    let rightTotal = subResult[i].rightTotal
-    let wrongTotal = subResult[i].wrongTotal
-    let total = rightTotal + wrongTotal
-    let level = subResult[i].level + base
-    if (total != 0) {
-      score += (100 - baseScore) * level * rightTotal / total
-    }
-    console.log(score)
-  }
-  let tempScore = Math.round(score / levelTotal + baseScore)
-  console.log(score, levelTotal, tempScore)
-  return score === 0 ? 0 : tempScore
-}
-
-/**
  * 封封微信的的request
  */
 function request(url, data = {}, method = 'GET',header ={"Content-Type":"application/json"}) {
@@ -100,17 +41,6 @@ function addOptions(subject) {
   return subject
 }
 
-//生成从minNum到maxNum的随机数
-// function randomNum(maxNum) {
-//   switch (arguments.length) {
-//     case 1:
-//       return parseInt(Math.random() + 1, 10)-1;
-//     case 2:
-//       return parseInt(Math.random() * maxNum + 1, 10)-1;
-//     default:
-//       return 0;
-//   }
-// }
 function randomNum(maxNum) {
   return parseInt(Math.random() * maxNum + 1, 10) - 1;
 }
@@ -160,13 +90,6 @@ function rTime(date) {
 }
 
 //判断题目是否正确
-function isRight(yourAnswer, rightAnswer) {
-  return yourAnswer == rightAnswer
-}
-
-function isRightToNum(isRight) {
-  return isRight ? 1 : 0
-}
 
 function numToIsRight(num) {
   return num == 1
@@ -180,26 +103,6 @@ function isFree(exams) {
     }
     return -1;
   }
-}
-
-//添加答题记录(要改一下的)
-function addRecord(answer, result, prbm_id, ex_id, s_id, tst_id) {
-  var obj = {}
-  obj.answer = answer;
-  obj.result = result;
-  obj.prbm_id = prbm_id;
-  obj.ex_id = ex_id;
-  obj.s_id = s_id;
-  obj.tst_id = tst_id
-  return obj;
-}
-
-//添加考试结果数据
-function addExamResult(score, tst_id) {
-  var obj = {}
-  obj.score = score;
-  obj.tst_id = tst_id;
-  return obj;
 }
 
 //改变选项，清楚其他颜色
@@ -262,18 +165,6 @@ function latexToMarkdown(subjects) {
   }
   return newSubjects
 }
-
-// function isNum(val) {
-//   // 先判定是否为number
-//   if (typeof val !== 'number') {
-//     return false;
-//   }
-//   if (!isNaN(val)) {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }
 function formatExams(exams) {
   let ptime = ''
   let etime = ''
@@ -292,7 +183,6 @@ function formatExams(exams) {
   return exams
 }
 module.exports = {
-  // isNum: isNum,
   formatExams,
   isFree,
   latexToMarkdown,
@@ -302,15 +192,9 @@ module.exports = {
   formatTime,
   formatTimeStamp,
   rTime,
-  getLevel,
-  isRight,
-  isRightToNum,
   numToIsRight,
-  addRecord,
   changeOption,
   removeOptionColor,
   createSubResult,
-  getScore,
-  addExamResult,
   arrObjectToStr
 }

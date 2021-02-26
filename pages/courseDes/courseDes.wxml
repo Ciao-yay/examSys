@@ -42,8 +42,8 @@
     </view>
   </view>
 </view>
-<view class="showMore" bindtap="showMore">{{isShow?"-":"+"}}</view>
-<view class="bottom" wx:if="{{isShow}}">
+<view class="showMore {{isShow && 'showMoreSelected'}}" bindtap="showMore">···</view>
+<view class="bottom {{isShow && 'bottomSelected'}}" wx:if="{{isShow}}">
   <view class="publishExam" bindtap="toPublishExam">发布新的测试</view>
   <view class="deleteTeach">删除课程</view>
 </view>
