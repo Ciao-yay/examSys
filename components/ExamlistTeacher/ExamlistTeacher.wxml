@@ -1,0 +1,43 @@
+<van-popup show="{{ show }}" bind:close="onClose">
+  <view class="examDescribe">
+    <!-- 课程名 -->
+    <view class="crsName">
+      <h1>{{exam.crs_name}}</h1>
+    </view>
+    <!-- 发布者 -->
+    <view class="poster">发布者：张老师</view>
+    <!-- 考察知识点 -->
+    <view class="know">考察知识点：{{exam.kn_name}}</view>
+    <!-- 发布时间 -->
+    <view>发布时间：{{exam.public_time}}</view>
+    <!-- 截止时间 -->
+    <view>截止时间：{{exam.end_time}}</view>
+    <!-- 成绩 -->
+    <!-- <view wx:if="{{exam.score}}">得分：{{exam.score}}</view> -->
+    <!-- 按钮：查看详情、进入考试 -->
+    <button bind:tap="chooseWay">详情</button>
+  </view>
+</van-popup>
+<view class="exams">
+  <view class="examItem" wx:for="{{exams}}" wx:key="ex_id" bind:tap="showExamDescribe" data-exam="{{item}}">
+    <!-- 头部信息 -->
+    <view class="header">
+      <view class="course">{{item.crs_name}}</view>
+      <view class="score">完成人数</view>
+    </view>
+    <!-- 描述信息 -->
+    <view class="main">
+      <view class="charpter">
+        <!-- <view class="mainCharpter">{{item.memo}}</view> -->
+        <view class="subCharpter">{{item.kn_name}}</view>
+      </view>
+      <!-- <view class="status">{{item.score?"已完成":"未完成"}}</view> -->
+    </view>
+    <!-- 落款 -->
+    <view class="footer">
+      <!-- 发布者 -->
+      <view class="publicer">{{item.public_time}}</view>
+      <view class="time">{{item.isOut?"已截止":item.end_time}}</view>
+    </view>
+  </view>
+</view>
