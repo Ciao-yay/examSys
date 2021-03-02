@@ -1,6 +1,7 @@
 // pages/publishExam/publishExam.js
 const fuc = require('../../utils/fuc.js')
 const api = require('../../utils/api.js')
+const moment = require('../../utils/moment.js')
 Page({
 
   /**
@@ -74,10 +75,9 @@ Page({
     var that = this;
     var flag = that.data.isTimeSelected&&that.data.isDateSelected&&that.data.isKnowSelected;
     let nowTime = new Date()
-    // nowTime = nowTime.getFullYear('zh')+'-'+(nowTime.getMonth('zh')+1)+'-'+nowTime.getDate('zh')
-    // time = nowTime.getTime
-    let endTime = `${that.data.date} ${that.data.time}`
+    let endTime = moment(`${that.data.date} ${that.data.time}`)
     let endTimeStand = new Date(endTime)
+    console.log(endTimeStand-nowTime)
     if((endTimeStand-nowTime)/(1000*60)<10){
       wx.showModal({
         title: '时间过短',
@@ -145,12 +145,7 @@ Page({
     /* 获取当前日期 */
     // const rule = { weekday: undefined, year: 'numeric', month: 'long', day: 'numeric' };
     let nowDate = new Date()
-    // console.log(nowDate)
     nowDate = nowDate.getFullYear('zh')+'-'+(nowDate.getMonth('zh')+1)+'-'+nowDate.getDate('zh')
-    // let nowTime = new Date().toLocaleTimeString('chinese', { hour12: false })
-    // let reg = new RegExp("/","g")
-    // nowDate = nowDate.replace(reg,"-")
-    // nowTime = nowTime.substr(0,5)
     that.setData({
       nowDate
     })

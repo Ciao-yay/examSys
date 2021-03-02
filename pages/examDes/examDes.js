@@ -17,11 +17,8 @@ Page({
    */
   onLoad: async function (options) {
     let exam,replyDetail
-    const eventChannel = this.getOpenerEventChannel()
-    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('acceptDataFromOpenerPage', function (data) {
-      exam = data.exam
-    })
+    exam = JSON.parse(options.exam)
+    console.log(JSON.parse(options.exam))
     try{
       let res = await fuc.request(api.getReplyDetail,{tst_id:exam.tst_id})
       if(res.data.code){

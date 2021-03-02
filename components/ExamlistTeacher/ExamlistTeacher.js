@@ -58,12 +58,13 @@ Component({
         // 判断是进入测试还是查看详情
         chooseWay() {
             let { exam } = { ...this.data }
-            this.toReplyDetail(exam)
+            this.toExamDetailT(exam)
         },
         // 查看测试详情
-        toCourseDetail(exam) {
+        toExamDetailT(exam) {
+            this.onClose()
             wx.navigateTo({
-                url: "/pages/courseDetail/courseDetail",
+                url: "/pages/examDetailT/examDetailT?exam="+JSON.stringify(exam),
                 success: function (res) {
                     // 通过eventChannel向被打开页面传送数据
                     res.eventChannel.emit('acceptDataFromOpenerPage', { exam })

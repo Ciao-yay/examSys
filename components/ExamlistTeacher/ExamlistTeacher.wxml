@@ -23,7 +23,7 @@
     <!-- 头部信息 -->
     <view class="header">
       <view class="course">{{item.crs_name}}</view>
-      <view class="score">完成人数</view>
+      <view class="score">{{item.hasDone}}/{{item.total}}</view>
     </view>
     <!-- 描述信息 -->
     <view class="main">

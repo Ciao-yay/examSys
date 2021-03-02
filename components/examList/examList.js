@@ -69,8 +69,9 @@ Component({
     },
     // 查看作答详情
     toReplyDetail(exam) {
+      this.onClose()
       wx.navigateTo({
-        url: "/pages/examDes/examDes",
+        url: "/pages/examDes/examDes?exam="+JSON.stringify(exam),
         success: function (res) {
           // 通过eventChannel向被打开页面传送数据
           res.eventChannel.emit('acceptDataFromOpenerPage', { exam })
@@ -79,6 +80,7 @@ Component({
     },
     /* 加入考试 */
     joinExam(exam) {
+      this.onClose()
       let title = "是否立即参加考试？"
       let content = "点击确定立即开始考试！"
       if (exam.status == 1) {

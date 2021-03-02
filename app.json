@@ -1,56 +1,56 @@
 {
-  "pages": [
-    "pages/chooseIdentity/chooseIdentity",
-    "pages/stuIndex/stuIndex",
-    "pages/preExam/preExam",
-    "pages/exams/exams",
-    "pages/examFinished/examFinished",
-    "pages/examDes/examDes",
-    "pages/answerDes/answerDes",
-    "pages/logs/logs",
-    "pages/studentSet/studentSet",
-    "pages/teaIndex/teaIndex",
-    "pages/courseDes/courseDes",
-    "pages/manageTeach/manageTeach",
-    "pages/addTeach/addTeach",
-    "pages/publishExam/publishExam",
-    "pages/test/test",
-    "pages/upload/upload",
-    "pages/wrongSubs/wrongSubs",
-    "pages/wsDetail/wsDetail",
-    "pages/my/my",
-    "pages/loginTest/loginTest",
-    "pages/pageDesign/pageDesign",
-    "pages/err/err"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "线上答题系统",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/stuIndex/stuIndex",
-        "text": "首页",
-        "iconPath": "images/home0.png",
-        "selectedIconPath": "images/home1.png"
-        
-      },
-      {
-        "pagePath": "pages/upload/upload",
-        "text": "上传题目",
-        "iconPath": "images/upload0.png",
-        "selectedIconPath": "images/upload1.png"
-      },
-      {
-        "pagePath": "pages/wrongSubs/wrongSubs",
-        "text": "错题集",
-        "iconPath": "images/wrong0.png",
-        "selectedIconPath": "images/wrong1.png"
-      }
-    ]
-  },
-  "sitemapLocation": "sitemap.json"
+    "pages": [
+        "pages/chooseIdentity/chooseIdentity",
+        "pages/stuIndex/stuIndex",
+        "pages/preExam/preExam",
+        "pages/exams/exams",
+        "pages/examFinished/examFinished",
+        "pages/examDes/examDes",
+        "pages/answerDes/answerDes",
+        "pages/logs/logs",
+        "pages/studentSet/studentSet",
+        "pages/teaIndex/teaIndex",
+        "pages/courseDes/courseDes",
+        "pages/manageTeach/manageTeach",
+        "pages/addTeach/addTeach",
+        "pages/publishExam/publishExam",
+        "pages/test/test",
+        "pages/upload/upload",
+        "pages/wrongSubs/wrongSubs",
+        "pages/wsDetail/wsDetail",
+        "pages/my/my",
+        "pages/loginTest/loginTest",
+        "pages/pageDesign/pageDesign",
+        "pages/err/err",
+        "pages/examDetailT/examDetailT"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "线上答题系统",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/stuIndex/stuIndex",
+                "text": "首页",
+                "iconPath": "images/home0.png",
+                "selectedIconPath": "images/home1.png"
+            },
+            {
+                "pagePath": "pages/upload/upload",
+                "text": "上传题目",
+                "iconPath": "images/upload0.png",
+                "selectedIconPath": "images/upload1.png"
+            },
+            {
+                "pagePath": "pages/wrongSubs/wrongSubs",
+                "text": "错题集",
+                "iconPath": "images/wrong0.png",
+                "selectedIconPath": "images/wrong1.png"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
 }

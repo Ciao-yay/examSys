@@ -1,0 +1,4 @@
+<!--pages/examDetailT/examDetailT.wxml-->
+<view class="" wx:for="{{testList}}" wx:key="s_id">
+  <van-cell center title="{{item.s_name}}" value="{{item.status===2?item.score:'未完成'}}"/>
+</view>

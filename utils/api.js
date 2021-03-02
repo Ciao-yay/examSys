@@ -1,10 +1,11 @@
 // 测试服务器
 // const ApiRootUrl = "https://www.nciao.cn/exam/";
 // 本地服务器
-const ApiRootUrl = "http://localhost:8080/exam/";
-const ApiRootUrlV1 = "http://localhost:8080/v1/exam/";
+// const ApiRootUrl = "http://localhost:8080/exam/";
+// const ApiRootUrlV1 = "http://localhost:8080/v1/exam/";
 // 正式服务器
-// const ApiRootUrl = "https://examsys.nciao.cn/examSystem/";
+const ApiRootUrl = "https://examsys.nciao.cn/examSystem/";
+const ApiRootUrlV1 = "https://examsys.nciao.cn/v1/exam/";
 const Student = "student/"; //学生
 const Teacher = "teacher/"; //老师
 const Test = "test/"; //登录
@@ -15,6 +16,9 @@ module.exports = {
   /* 考试 */
   getExamList: `${ApiRootUrlV1}/examList`,// 获取测试列表
   getReplyDetail:`${ApiRootUrlV1}/replyDetail`,// 获取测试列表
+  getTestInfoList:`${ApiRootUrlV1}/testInfoList`,// 获取测试列表
+
+  
   /* 用户 */
   /* 功能测试 */
   tGetWrongSubs: ApiRootUrl + Tests + "tGetWrongSubs", //查询错题
